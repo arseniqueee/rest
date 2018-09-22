@@ -8,7 +8,9 @@ import rest.organization.view.DataView;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/organization")
@@ -23,17 +25,21 @@ public class OrganizationController {
 
     @PostMapping(value = "/list")
     @ResponseBody
-    public DataView getAll(@RequestParam(value = "inn", required = false) String inn, @RequestParam(value = "name", required = true) String name,
+    public Map getAll(@RequestParam(value = "inn", required = false) String inn, @RequestParam(value = "name", required = true) String name,
                            @RequestParam(value = "isActive", required = false) boolean isActive) {
+        Map a = new HashMap();
         List<Organization> list = service.findAll(inn, name, isActive);
-        return new DataView(list);
+        a.put("data", list);
+        return a;
     }
 
     @GetMapping(value = "/{id}")
     @ResponseBody
-    public DataView getById(@PathVariable(value = "id") Long id) {
-        List<Organization> list = Collections.singletonList(service.findById(id));
-        return new DataView(list);
+    public Map getById(@PathVariable(value = "id") Long id) {
+        Map a = new HashMap();
+        Organization organization = service.findById(id);
+        a.put("data", organization);
+        return a;
     }
 
     @PostMapping(value = "/save")
