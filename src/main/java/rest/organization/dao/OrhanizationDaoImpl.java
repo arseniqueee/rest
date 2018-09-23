@@ -21,7 +21,7 @@ public class OrhanizationDaoImpl implements OrganizationDao {
 
     @Override
     public List<Organization> getAll(String inn, String name, boolean isActive) {
-        String query = "SELECT h from organization h where h.name = :name and h.isActive = :isActive ";
+        String query = "SELECT h from Organization h where h.name = :name and h.isActive = :isActive ";
         if (inn != null) {
             query += "and h.inn = :inn";
         }

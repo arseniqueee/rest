@@ -2,19 +2,19 @@ package rest.organization.model;
 
 
 import io.swagger.annotations.ApiModel;
+import rest.office.model.Office;
 
 import javax.persistence.*;
+import java.util.List;
 
-@Entity(name = "organization")
+@Entity
+@Table(name = "organization")
 public class Organization {
 
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", length = 20)
     private Long id;
-
-    @Version
-    private Integer version;
 
     @Column(name = "name", length = 50, nullable = false)
     private String name;
@@ -36,6 +36,9 @@ public class Organization {
 
     @Column(name = "is_active")
     private Boolean isActive;
+
+    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
+    private List<Office> offices;
 
     public Organization() {
 

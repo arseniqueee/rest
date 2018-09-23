@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rest.organization.model.Organization;
 import rest.organization.dao.OrganizationDao;
-import rest.organization.view.OrganizationSaveView;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
