@@ -31,11 +31,11 @@ public class OrganizationController {
 
     @GetMapping(value = "/{id}")
     @ResponseBody
-    public Map getById(@PathVariable(value = "id") Long id) {
-        Map a = new HashMap();
+    public Organization getById(@PathVariable(value = "id") Long id) {
+//        Map a = new HashMap();
         Organization organization = service.findById(id);
-        a.put("data", organization);
-        return a;
+//        a.put("data", organization);
+        return organization;
     }
 
     @PostMapping(value = "/save")
