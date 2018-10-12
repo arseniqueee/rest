@@ -51,4 +51,15 @@ public class OfficeDaoImpl implements OfficeDao {
     public void save(Office office) {
         em.persist(office);
     }
+
+    @Override
+    public void update(Office office) {
+        Office of = em.find(Office.class, office.getId());
+        of.setName(office.getName());
+        of.setPhone(office.getPhone());
+        of.setAddress(office.getAddress());
+        of.setIsActive(office.getIsActive());
+        of.setOrgId(office.getOrgId());
+        em.persist(of);
+    }
 }

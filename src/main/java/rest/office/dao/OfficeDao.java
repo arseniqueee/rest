@@ -10,4 +10,6 @@ public interface OfficeDao {
     public Office findById(Long id);
 
     public void save(Office office);
+
+    public void update(Office office);
 }

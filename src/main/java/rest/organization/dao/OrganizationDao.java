@@ -11,4 +11,7 @@ public interface OrganizationDao {
     public Organization getById(Long id);
 
     public void save(Organization organization);
+
+    public void update(Organization organization);
+
 }

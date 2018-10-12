@@ -46,6 +46,6 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Transactional
     public void update(OrganizationUpdateDto dto) {
         Organization organization = mapper.map(dto, Organization.class);
-        dao.save(organization);
+        dao.update(organization);
     }
 }

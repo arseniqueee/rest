@@ -1,16 +1,19 @@
 package rest.office.service;
 
+import rest.office.dto.*;
 import rest.office.model.Office;
 
 import java.util.List;
 
 public interface OfficeService {
 
-    List<Office> findByIdOrg(Long orgId, String name, String phone, boolean isActive);
+    List<OfficeListOutDto> findByIdOrg(OfficeListDto dto);
 
-    Office findById(Long id);
+    OfficeItemDto findById(Long id);
 
-    void save(Office office);
+    void update(OfficeUpdateDto dto);
+
+    void save(OfficeSaveDto office);
 
 
 }

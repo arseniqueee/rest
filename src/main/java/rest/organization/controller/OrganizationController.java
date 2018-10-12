@@ -24,7 +24,7 @@ public class OrganizationController {
     }
 
     @PostMapping(value = "/list", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public List<OrganizationItemDto> getAll(@RequestBody @Validated OrganizationListDto dto) {
+    public List<OrganizationItemDto> getAll(@RequestBody  OrganizationListDto dto) {
         List<OrganizationItemDto> list = service.findAll(dto);
         return list;
     }
@@ -36,12 +36,12 @@ public class OrganizationController {
     }
 
     @PostMapping(value = "/save", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public void save(@RequestBody @Validated OrganizationSaveDto dto) {
+    public void save(@RequestBody  OrganizationSaveDto dto) {
         service.save(dto);
     }
 
     @PostMapping(value = "/update", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public void update(@RequestBody @Validated OrganizationUpdateDto dto) {
+    public void update(@RequestBody OrganizationUpdateDto dto) {
         service.update(dto);
     }
 

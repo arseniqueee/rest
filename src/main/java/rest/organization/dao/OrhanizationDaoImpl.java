@@ -41,7 +41,12 @@ public class OrhanizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public void save(Organization organization) {
+    public void save(Organization organization){
+        entityManager.persist(organization);
+    }
+
+    @Override
+    public void update(Organization organization) {
         Organization org = entityManager.find(Organization.class, organization.getId());
         org.setPhone(organization.getPhone());
         org.setAddress(organization.getAddress());
