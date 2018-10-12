@@ -1,13 +1,16 @@
 package rest.organization.service;
 
+import rest.organization.dto.*;
 import rest.organization.model.Organization;
 import java.util.List;
 
 public interface OrganizationService {
 
-    List<Organization> findAll(String inn, String name, boolean isActive);
+    List<OrganizationItemDto> findAll(OrganizationListDto dto);
 
-    Organization findById(Long id);
+    OrganizationFullDto findById(Long id);
 
-    void save(Organization organization);
+    void save(OrganizationSaveDto organization);
+
+    void update(OrganizationUpdateDto dto);
 }

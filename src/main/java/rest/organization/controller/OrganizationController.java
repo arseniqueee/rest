@@ -1,12 +1,16 @@
 package rest.organization.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import rest.organization.dto.*;
 import rest.organization.model.Organization;
 import rest.organization.service.OrganizationService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "/organization")
@@ -19,61 +23,26 @@ public class OrganizationController {
         this.service = service;
     }
 
-    @PostMapping(value = "/list")
-    @ResponseBody
-    public Map getAll(@RequestParam(value = "inn", required = false) String inn, @RequestParam(value = "name", required = true) String name,
-                           @RequestParam(value = "isActive", required = false) boolean isActive) {
-        Map a = new HashMap();
-        List<Organization> list = service.findAll(inn, name, isActive);
-        a.put("data", list);
-        return a;
+    @PostMapping(value = "/list", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    public List<OrganizationItemDto> getAll(@RequestBody @Validated OrganizationListDto dto) {
+        List<OrganizationItemDto> list = service.findAll(dto);
+        return list;
     }
 
-    @GetMapping(value = "/{id}")
-    @ResponseBody
-    public Organization getById(@PathVariable(value = "id") Long id) {
-//        Map a = new HashMap();
-        Organization organization = service.findById(id);
-//        a.put("data", organization);
+    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
+    public OrganizationFullDto getById(@PathVariable(value = "id") Long id) {
+        OrganizationFullDto organization = service.findById(id);
         return organization;
     }
 
-    @PostMapping(value = "/save")
-    @ResponseBody
-    public String save(@RequestParam(value = "name", required = true) String name, @RequestParam(value = "full_name", required = true) String fullName,
-                       @RequestParam(value = "inn", required = true) String inn, @RequestParam(value = "kpp", required = true) String kpp,
-                       @RequestParam(value = "address", required = true) String address, @RequestParam(value = "phone", required = true) String phone) {
-        Organization organization = new Organization(name, fullName, inn, kpp, address, phone, true);
-        String response = "";
-        try {
-            service.save(organization);
-            response = "result: success";
-        }catch (Exception e){
-            response = "result: "+e.toString();
-        }
-        return  response;
+    @PostMapping(value = "/save", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    public void save(@RequestBody @Validated OrganizationSaveDto dto) {
+        service.save(dto);
     }
 
-    @PostMapping(value = "/update")
-    @ResponseBody
-    public String update(@RequestParam(value = "id", required = true) Long id,
-                         @RequestParam(value = "name", required = true) String name, @RequestParam(value = "full_name", required = true) String fullName,
-                         @RequestParam(value = "inn", required = true) String inn, @RequestParam(value = "kpp", required = true) String kpp,
-                         @RequestParam(value = "address", required = true) String address, @RequestParam(value = "phone", required = true) String phone){
-        Organization organization = service.findById(id);
-        organization.setName(name);
-        organization.setFullName(fullName);
-        organization.setInn(inn);
-        organization.setKpp(kpp);
-        organization.setAddress(address);
-        organization.setPhone(phone);
-        String response = "";
-        try {
-            service.save(organization);
-            response = "result: success";
-        }catch (Exception e){
-            response = "result: "+e.toString();
-        }
-        return response;
+    @PostMapping(value = "/update", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    public void update(@RequestBody @Validated OrganizationUpdateDto dto) {
+        service.update(dto);
     }
+
 }

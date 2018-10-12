@@ -1,5 +1,6 @@
 package rest.organization.dao;
 
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import rest.organization.model.Organization;
@@ -41,6 +42,14 @@ public class OrhanizationDaoImpl implements OrganizationDao {
 
     @Override
     public void save(Organization organization) {
-        entityManager.persist(organization);
+        Organization org = entityManager.find(Organization.class, organization.getId());
+        org.setPhone(organization.getPhone());
+        org.setAddress(organization.getAddress());
+        org.setKpp(organization.getKpp());
+        org.setInn(organization.getInn());
+        org.setFullName(organization.getFullName());
+        org.setName(organization.getName());
+        org.setActive(organization.getActive());
+        entityManager.persist(org);
     }
 }

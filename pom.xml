@@ -21,9 +21,16 @@
         <java.version>1.8</java.version>
         <swagger.version>2.8.0</swagger.version>
         <mysql.version>8.0.12</mysql.version>
+        <mapper.version>1.4.0</mapper.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>${mapper.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
