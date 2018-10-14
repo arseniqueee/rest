@@ -45,7 +45,7 @@ public class OfficeController {
     }
 
     @PostMapping("/update")
-    public void updateOffice(@RequestBody  OfficeUpdateDto dto){
+    public void updateOffice(@RequestBody @Validated OfficeUpdateDto dto){
         service.update(dto);
     }
 

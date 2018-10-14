@@ -1,5 +1,9 @@
 package rest.user.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.NotNull;
+
 public class UserListDto {
 
     private Long officeId;
@@ -29,6 +33,8 @@ public class UserListDto {
         this.citizenshipCode = citizenshipCode;
     }
 
+    @ApiModelProperty(required = true)
+    @NotNull
     public Long getOfficeId() {
         return officeId;
     }

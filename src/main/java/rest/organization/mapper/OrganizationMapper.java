@@ -19,18 +19,17 @@ public class OrganizationMapper extends ConfigurableMapper {
                 .register();
 
 
-
         factory.classMap(Organization.class, OrganizationFullDto.class)
                 .byDefault()
                 .register();
 
         factory.classMap( Organization.class, OrganizationSaveDto.class)
-                .field("isActive", "active")
+//                .field("isActive", "active")
                 .byDefault()
                 .register();
 
         factory.classMap( Organization.class, OrganizationUpdateDto.class)
-                .field("isActive", "active")
+//                .field("isActive", "active")
                 .byDefault()
                 .register();
     }

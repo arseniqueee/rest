@@ -1,5 +1,7 @@
 package rest.office.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class OfficeUpdateDto {
 
     private Long id;
@@ -26,6 +28,7 @@ public class OfficeUpdateDto {
         this.isActive = isActive;
     }
 
+    @NotNull
     public Long getId() {
         return id;
     }
@@ -42,6 +45,7 @@ public class OfficeUpdateDto {
         this.orgId = orgId;
     }
 
+    @NotNull
     public String getName() {
         return name;
     }
@@ -50,6 +54,7 @@ public class OfficeUpdateDto {
         this.name = name;
     }
 
+    @NotNull
     public String getAddress() {
         return address;
     }

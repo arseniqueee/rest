@@ -1,45 +1,32 @@
-package rest.user.model;
+package rest.user.dto;
 
+import javax.validation.constraints.NotNull;
 
-import javax.persistence.*;
+public class UserUpdateDto {
 
-@Entity
-@Table(name = "user")
-public class User {
-
-    @Id
-    @GeneratedValue
-    @Column(name = "id", length = 20)
     private Long id;
 
-    @Column(name = "office_id", length = 20, nullable = false)
     private Long officeId;
 
-    @Column(name = "first_name", length = 100, nullable = false)
     private String firstName;
 
-    @Column(name = "second_name", length = 100, nullable = false)
     private String secondName;
 
-    @Column(name = "middle_name", length = 100, nullable = false)
     private String middleName;
 
-    @Column(name = "position", length = 50, nullable = false)
     private String position;
 
-    @Column(name = "doc_code", nullable = false)
     private int docCode;
 
-    @Column(name = "city_code", nullable = false)
     private int citizenshipCode;
 
-    @Column(name = "identified", nullable = false)
     private boolean identified;
 
-    public User() {
+    public UserUpdateDto() {
     }
 
-    public User(Long officeId, String firstName, String secondName, String middleName, String position, int docCode, int citizenshipCode, boolean identified) {
+    public UserUpdateDto(Long id, Long officeId, String firstName, String secondName, String middleName, String position, int docCode, int citizenshipCode, boolean identified) {
+        this.id = id;
         this.officeId = officeId;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -66,6 +53,7 @@ public class User {
         this.officeId = officeId;
     }
 
+    @NotNull(message = "First name not be null")
     public String getFirstName() {
         return firstName;
     }
@@ -79,7 +67,7 @@ public class User {
     }
 
     public void setSecondName(String secondName) {
-        this.secondName= secondName;
+        this.secondName = secondName;
     }
 
     public String getMiddleName() {
@@ -90,6 +78,7 @@ public class User {
         this.middleName = middleName;
     }
 
+    @NotNull(message = "Position not be null")
     public String getPosition() {
         return position;
     }
