@@ -1,5 +1,6 @@
 package rest.user.service;
 
+import rest.response.Result;
 import rest.user.dto.UserItemDto;
 import rest.user.dto.UserListDto;
 import rest.user.dto.UserListOutDto;
@@ -13,5 +14,5 @@ public interface UserService {
 
     UserItemDto findId(Long id);
 
-    void update(UserUpdateDto dto);
+    Result update(UserUpdateDto dto);
 }

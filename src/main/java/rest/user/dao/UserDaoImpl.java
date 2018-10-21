@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import rest.docs.dao.DocsDataDao;
 import rest.docs.model.DocsData;
 import rest.exception.DocsDataNotFoundException;
+import rest.exception.UserNotFoundException;
 import rest.user.model.User;
 
 import javax.persistence.EntityManager;
@@ -76,7 +77,11 @@ public class UserDaoImpl implements  UserDao {
 
     @Override
     public void update(User user) {
-        User us = manager.find(User.class, user.getId());
+        User us = new User();
+        us = manager.find(User.class, user.getId());
+        if (us == null){
+            throw new UserNotFoundException("User not found");
+        }
         us.setFirstName(user.getFirstName());
         us.setMiddleName(user.getMiddleName());
         us.setSecondName(user.getSecondName());
@@ -85,9 +90,9 @@ public class UserDaoImpl implements  UserDao {
         if (data != null) {
             us.setDocCode(user.getDocCode());
         }
-//        else {
-//            throw new DocsDataNotFoundException("DocsData not found");
-//        }
+        else {
+            throw new DocsDataNotFoundException("DocsData not found");
+        }
         us.setCitizenshipCode(user.getCitizenshipCode());
         us.setOfficeId(user.getOfficeId());
         us.setIdentified(user.isIdentified());

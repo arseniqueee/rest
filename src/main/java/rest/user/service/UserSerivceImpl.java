@@ -2,6 +2,7 @@ package rest.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rest.response.Result;
 import rest.user.dao.UserDao;
 import rest.user.dto.UserItemDto;
 import rest.user.dto.UserListDto;
@@ -40,7 +41,8 @@ public class UserSerivceImpl implements UserService {
 
     @Override
     @Transactional
-    public void update(UserUpdateDto dto) {
+    public Result update(UserUpdateDto dto) {
         dao.update(mapper.map(dto, User.class));
+        return new Result("success");
     }
 }
