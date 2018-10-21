@@ -15,7 +15,7 @@ public class DocsData {
     private Long id;
 
     @Column(name = "docs_code", nullable = false)
-    private int docsCode;
+    private Long docsCode;
 
     @Column(name = "date", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -25,17 +25,17 @@ public class DocsData {
     private Long userId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "docs_code")
+    @JoinColumn(name = "docs_code", insertable = false, updatable = false)
     private Docs docs;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", updatable =  false, insertable = false)
     private User user;
 
     public DocsData() {
     }
 
-    public DocsData(int docsCode, Date date, Long userId, Docs docs, User user) {
+    public DocsData(Long docsCode, Date date, Long userId, Docs docs, User user) {
         this.docsCode = docsCode;
         this.date = date;
         this.userId = userId;
@@ -51,11 +51,11 @@ public class DocsData {
         this.id = id;
     }
 
-    public int getDocsCode() {
+    public Long getDocsCode() {
         return docsCode;
     }
 
-    public void setDocsCode(int docsCode) {
+    public void setDocsCode(Long docsCode) {
         this.docsCode = docsCode;
     }
 

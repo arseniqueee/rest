@@ -9,16 +9,16 @@ public class Docs {
 
     @Id
     @Column(name = "code")
-    private int code;
+    private Long code;
 
     @Column(name = "name")
     private String name;
 
-    public int getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Long code) {
         this.code = code;
     }
 

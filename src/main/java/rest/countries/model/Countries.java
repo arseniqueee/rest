@@ -10,7 +10,7 @@ public class Countries {
     @Id
     @GeneratedValue
     @Column(name = "code")
-    private int code;
+    private Long code;
 
     @Column(name = "name", length = 50)
     private String name;
@@ -18,11 +18,11 @@ public class Countries {
     public Countries() {
     }
 
-    public int getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Long code) {
         this.code = code;
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserDao {
 
-    List<User> findAll(UserListDto dto);
+    List<User> findAll(Long officeId, String firstName, String lastName, String middleName, String position, Long docCode, Long citizenshipCode);
 
     User findById(Long id);
 

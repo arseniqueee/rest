@@ -1,6 +1,9 @@
 package rest.user.model;
 
 
+import rest.countries.model.Countries;
+import rest.docs.model.DocsData;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +21,9 @@ public class User {
     @Column(name = "first_name", length = 100, nullable = false)
     private String firstName;
 
+    @Column(name = "last_name", length = 100, nullable = false)
+    private String lastName;
+
     @Column(name = "second_name", length = 100, nullable = false)
     private String secondName;
 
@@ -28,19 +34,28 @@ public class User {
     private String position;
 
     @Column(name = "doc_code", nullable = false)
-    private int docCode;
+    private Long docCode;
 
     @Column(name = "city_code", nullable = false)
-    private int citizenshipCode;
+    private Long citizenshipCode;
 
     @Column(name = "identified", nullable = false)
     private boolean identified;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doc_code", insertable = false, updatable = false)
+    private DocsData docsData;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_code", updatable = false, insertable = false)
+    private Countries countries;
+
     public User() {
     }
 
-    public User(Long officeId, String firstName, String secondName, String middleName, String position, int docCode, int citizenshipCode, boolean identified) {
+    public User(Long officeId, String firstName, String lastName, String secondName, String middleName, String position, Long docCode, Long citizenshipCode, boolean identified) {
         this.officeId = officeId;
+        this.lastName = lastName;
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;
@@ -98,19 +113,19 @@ public class User {
         this.position = position;
     }
 
-    public int getDocCode() {
+    public Long getDocCode() {
         return docCode;
     }
 
-    public void setDocCode(int docCode) {
+    public void setDocCode(Long docCode) {
         this.docCode = docCode;
     }
 
-    public int getCitizenshipCode() {
+    public Long getCitizenshipCode() {
         return citizenshipCode;
     }
 
-    public void setCitizenshipCode(int citizenshipCode) {
+    public void setCitizenshipCode(Long citizenshipCode) {
         this.citizenshipCode = citizenshipCode;
     }
 
@@ -120,5 +135,29 @@ public class User {
 
     public void setIdentified(boolean identified) {
         this.identified = identified;
+    }
+
+    public DocsData getDocsData() {
+        return docsData;
+    }
+
+    public void setDocsData(DocsData docsData) {
+        this.docsData = docsData;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Countries getCountries() {
+        return countries;
+    }
+
+    public void setCountries(Countries countries) {
+        this.countries = countries;
     }
 }

@@ -3,6 +3,7 @@ package rest.user.dto;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
+import java.security.acl.LastOwnerException;
 
 public class UserListDto {
 
@@ -10,23 +11,23 @@ public class UserListDto {
 
     private String firstName;
 
-    private String seocindName;
+    private String lastName;
 
     private String middleName;
 
     private String position;
 
-    private int docCode;
+    private Long docCode;
 
-    private int citizenshipCode;
+    private Long citizenshipCode;
 
     public UserListDto() {
     }
 
-    public UserListDto(Long officeId, String firstName, String seocindName, String middleName, String position, int docCode, int citizenshipCode) {
+    public UserListDto(Long officeId, String firstName, String lastName, String middleName, String position, Long docCode, Long citizenshipCode) {
         this.officeId = officeId;
         this.firstName = firstName;
-        this.seocindName = seocindName;
+        this.lastName = lastName;
         this.middleName = middleName;
         this.position = position;
         this.docCode = docCode;
@@ -51,12 +52,12 @@ public class UserListDto {
         this.firstName = firstName;
     }
 
-    public String getSeocindName() {
-        return seocindName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSeocindName(String seocindName) {
-        this.seocindName = seocindName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getMiddleName() {
@@ -75,19 +76,19 @@ public class UserListDto {
         this.position = position;
     }
 
-    public int getDocCode() {
+    public Long getDocCode() {
         return docCode;
     }
 
-    public void setDocCode(int docCode) {
+    public void setDocCode(Long docCode) {
         this.docCode = docCode;
     }
 
-    public int getCitizenshipCode() {
+    public Long getCitizenshipCode() {
         return citizenshipCode;
     }
 
-    public void setCitizenshipCode(int citizenshipCode) {
+    public void setCitizenshipCode(Long citizenshipCode) {
         this.citizenshipCode = citizenshipCode;
     }
 }

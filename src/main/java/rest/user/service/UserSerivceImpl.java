@@ -28,7 +28,8 @@ public class UserSerivceImpl implements UserService {
 
     @Override
     public List<UserListOutDto> findAll(UserListDto dto) {
-        return null;
+        List<User> users = dao.findAll(dto.getOfficeId(), dto.getFirstName(), dto.getLastName(), dto.getMiddleName(), dto.getPosition(), dto.getDocCode(), dto.getCitizenshipCode());
+        return mapper.mapAsList(users, UserListOutDto.class);
     }
 
     @Override

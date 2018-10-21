@@ -16,16 +16,16 @@ public class UserUpdateDto {
 
     private String position;
 
-    private int docCode;
+    private Long docCode;
 
-    private int citizenshipCode;
+    private Long citizenshipCode;
 
     private boolean identified;
 
     public UserUpdateDto() {
     }
 
-    public UserUpdateDto(Long id, Long officeId, String firstName, String secondName, String middleName, String position, int docCode, int citizenshipCode, boolean identified) {
+    public UserUpdateDto(Long id, Long officeId, String firstName, String secondName, String middleName, String position, Long docCode, Long citizenshipCode, boolean identified) {
         this.id = id;
         this.officeId = officeId;
         this.firstName = firstName;
@@ -87,19 +87,19 @@ public class UserUpdateDto {
         this.position = position;
     }
 
-    public int getDocCode() {
+    public Long getDocCode() {
         return docCode;
     }
 
-    public void setDocCode(int docCode) {
+    public void setDocCode(Long docCode) {
         this.docCode = docCode;
     }
 
-    public int getCitizenshipCode() {
+    public Long getCitizenshipCode() {
         return citizenshipCode;
     }
 
-    public void setCitizenshipCode(int citizenshipCode) {
+    public void setCitizenshipCode(Long citizenshipCode) {
         this.citizenshipCode = citizenshipCode;
     }
 
