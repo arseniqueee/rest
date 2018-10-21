@@ -3,6 +3,7 @@ package rest.docs.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import rest.docs.model.Docs;
+import rest.docs.model.DocsData;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -23,5 +24,10 @@ public class DocsDaoImpl implements DocsDao {
         String query = "SELECT h from Docs h";
         TypedQuery<Docs> result = em.createQuery(query, Docs.class);
         return result.getResultList();
+    }
+
+    @Override
+    public void saveDocData(DocsData docsData) {
+
     }
 }

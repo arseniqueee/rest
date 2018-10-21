@@ -8,7 +8,6 @@ import javax.persistence.*;
 public class Docs {
 
     @Id
-    @GeneratedValue
     @Column(name = "code")
     private int code;
 
