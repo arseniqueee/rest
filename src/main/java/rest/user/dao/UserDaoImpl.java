@@ -99,5 +99,27 @@ public class UserDaoImpl implements  UserDao {
         manager.persist(us);
     }
 
+    @Override
+    public void save(User user) {
+        User userNew = new User();
+        userNew.setFirstName(user.getFirstName());
+        userNew.setMiddleName(user.getMiddleName());
+        userNew.setSecondName(user.getSecondName());
+        userNew.setOfficeId(user.getOfficeId());
+        userNew.setDocCode(user.getDocCode());
+        userNew.setPosition(user.getPosition());
+        userNew.setCitizenshipCode(user.getCitizenshipCode());
+        userNew.setIdentified(user.isIdentified());
+        userNew.setLastName(user.getLastName());
+        manager.persist(userNew);
+    }
+
+    @Override
+    public User findLast() {
+        String query = "select u from User u order by u.id desc";
+        TypedQuery<User> result = manager.createQuery(query, User.class);
+        return result.getResultList().get(0);
+    }
+
 
 }

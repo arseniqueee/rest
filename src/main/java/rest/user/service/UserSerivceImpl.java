@@ -2,16 +2,18 @@ package rest.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rest.docs.dao.DocsDao;
+import rest.docs.dao.DocsDataDao;
+import rest.docs.model.Docs;
+import rest.docs.model.DocsData;
 import rest.response.Result;
 import rest.user.dao.UserDao;
-import rest.user.dto.UserItemDto;
-import rest.user.dto.UserListDto;
-import rest.user.dto.UserListOutDto;
-import rest.user.dto.UserUpdateDto;
+import rest.user.dto.*;
 import rest.user.mapper.UserMapper;
 import rest.user.model.User;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,10 +23,16 @@ public class UserSerivceImpl implements UserService {
 
     private final UserMapper mapper;
 
+    private final DocsDataDao docsDataDao;
+
+    private final DocsDao docsDao;
+
     @Autowired
-    public UserSerivceImpl(UserDao dao, UserMapper mapper) {
+    public UserSerivceImpl(UserDao dao, UserMapper mapper, DocsDataDao docsDataDao, DocsDao docsDao) {
         this.dao = dao;
         this.mapper = mapper;
+        this.docsDataDao = docsDataDao;
+        this.docsDao = docsDao;
     }
 
     @Override
@@ -43,6 +51,26 @@ public class UserSerivceImpl implements UserService {
     @Transactional
     public Result update(UserUpdateDto dto) {
         dao.update(mapper.map(dto, User.class));
+        return new Result("success");
+    }
+
+    @Override
+    @Transactional
+    public Result save(UserSaveDto dto) {
+        if (docsDataDao.findById(dto.getDocCode()) != null){
+            dao.save(mapper.map(dto, User.class));
+        }else {
+            Docs docs = mapper.map(dto, Docs.class);
+            if (docsDao.findByCode(docs.getCode()) == null){
+                docsDao.saveDocs(docs);
+            }
+            dao.save(mapper.map(dto, User.class));
+            DocsData data = new DocsData(dto.getDocNumber(), new Date(), dao.findLast().getId());
+            docsDataDao.save(data);
+            User user = dao.findLast();
+            user.setDocCode(docsDataDao.findLast().getId());
+            dao.save(user);
+        }
         return new Result("success");
     }
 }

@@ -1,10 +1,7 @@
 package rest.user.service;
 
 import rest.response.Result;
-import rest.user.dto.UserItemDto;
-import rest.user.dto.UserListDto;
-import rest.user.dto.UserListOutDto;
-import rest.user.dto.UserUpdateDto;
+import rest.user.dto.*;
 
 import java.util.List;
 
@@ -15,4 +12,6 @@ public interface UserService {
     UserItemDto findId(Long id);
 
     Result update(UserUpdateDto dto);
+
+    Result save(UserSaveDto dto);
 }

@@ -35,12 +35,10 @@ public class DocsData {
     public DocsData() {
     }
 
-    public DocsData(Long docsCode, Date date, Long userId, Docs docs, User user) {
+    public DocsData(Long docsCode, Date date, Long userId) {
         this.docsCode = docsCode;
         this.date = date;
         this.userId = userId;
-        this.docs = docs;
-        this.user = user;
     }
 
     public Long getId() {

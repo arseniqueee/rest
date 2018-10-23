@@ -5,4 +5,8 @@ import rest.docs.model.DocsData;
 public interface DocsDataDao {
 
     DocsData findById(Long id);
+
+    void save(DocsData data);
+
+    DocsData findLast();
 }

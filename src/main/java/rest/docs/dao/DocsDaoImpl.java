@@ -7,6 +7,7 @@ import rest.docs.model.DocsData;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -30,4 +31,20 @@ public class DocsDaoImpl implements DocsDao {
     public void saveDocData(DocsData docsData) {
 
     }
+
+    @Override
+    @Transactional
+    public void saveDocs(Docs docs) {
+        Docs docsNew = new Docs();
+        docsNew.setCode(docs.getCode());
+        docsNew.setName(docs.getName());
+        em.persist(docsNew);
+    }
+
+    @Override
+    public Docs findByCode(Long code) {
+        return em.find(Docs.class, code);
+    }
+
+
 }

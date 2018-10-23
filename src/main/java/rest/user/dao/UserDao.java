@@ -13,5 +13,9 @@ public interface UserDao {
 
     void update(User user);
 
+    void save(User user);
+
+    User findLast();
+
 
 }

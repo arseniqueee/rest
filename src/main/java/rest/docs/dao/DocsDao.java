@@ -11,4 +11,10 @@ public interface DocsDao
     public List<Docs> getList();
 
     public void saveDocData(DocsData docsData);
+
+    void saveDocs(Docs docs);
+
+    Docs findByCode(Long code);
+
+
 }

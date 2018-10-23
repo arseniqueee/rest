@@ -6,10 +6,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import rest.response.Response;
 import rest.response.Result;
-import rest.user.dto.UserItemDto;
-import rest.user.dto.UserListDto;
-import rest.user.dto.UserListOutDto;
-import rest.user.dto.UserUpdateDto;
+import rest.user.dto.*;
 import rest.user.service.UserService;
 
 import java.util.List;
@@ -40,5 +37,10 @@ public class UserController {
     @PostMapping(value = "update", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public Result update(@RequestBody @Validated UserUpdateDto dto){
         return service.update(dto);
+    }
+
+    @PostMapping(value = "/save", consumes = APPLICATION_JSON_VALUE)
+    public Result save(@RequestBody @Validated UserSaveDto dto){
+        return service.save(dto);
     }
 }
