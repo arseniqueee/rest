@@ -1,5 +1,7 @@
 package rest.organization.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "/organization")
+@Api(tags = "Organization controller")
 public class OrganizationController {
 
     private final OrganizationService service;
@@ -24,23 +27,27 @@ public class OrganizationController {
     }
 
     @PostMapping(value = "/list", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Get organization`s list")
     public List<OrganizationItemDto> getAll(@RequestBody  OrganizationListDto dto) {
         List<OrganizationItemDto> list = service.findAll(dto);
         return list;
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Get organization by id")
     public OrganizationFullDto getById(@PathVariable(value = "id") Long id) {
         OrganizationFullDto organization = service.findById(id);
         return organization;
     }
 
     @PostMapping(value = "/save", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Save organization")
     public void save(@RequestBody  OrganizationSaveDto dto) {
         service.save(dto);
     }
 
     @PostMapping(value = "/update", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Update organization")
     public void update(@RequestBody OrganizationUpdateDto dto) {
         service.update(dto);
     }

@@ -1,5 +1,11 @@
 package rest.user.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -70,6 +76,7 @@ public class UserSaveDto {
         this.docCode = docCode;
     }
 
+    @ApiModelProperty(example = "2016-01-01")
     public Date getDocDate() {
         return docDate;
     }
