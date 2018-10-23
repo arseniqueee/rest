@@ -21,12 +21,10 @@ public class OfficeMapper extends ConfigurableMapper {
                 .register();
 
         factory.classMap(Office.class, OfficeUpdateDto.class)
-                .field("isActive", "active")
                 .byDefault()
                 .register();
 
         factory.classMap(Office.class, OfficeSaveDto.class)
-                .field("isActive", "active")
                 .byDefault()
                 .register();
 

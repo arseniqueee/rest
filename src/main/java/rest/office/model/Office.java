@@ -2,8 +2,10 @@ package rest.office.model;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import rest.organization.model.Organization;
+import rest.user.model.User;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "office")
@@ -27,21 +29,24 @@ public class Office {
   private String phone;
 
   @Column(name = "is_active")
-  private boolean isActive;
+  private boolean active;
 
   @ManyToOne
   @JoinColumn(name = "org_id", insertable = false, updatable = false)
   private Organization organization;
 
+  @OneToMany(mappedBy = "office", cascade = CascadeType.ALL)
+  private List<User> users;
+
   public Office() {
   }
 
-  public Office(long orgId, String name, String address, String phone, boolean isActive) {
+  public Office(long orgId, String name, String address, String phone, boolean active) {
     this.orgId = orgId;
     this.name = name;
     this.address = address;
     this.phone = phone;
-    this.isActive = isActive;
+    this.active = active;
   }
 
   public Long getId() {
@@ -89,12 +94,27 @@ public class Office {
   }
 
 
-  public boolean getIsActive() {
-    return isActive;
+  public boolean isActive() {
+    return active;
   }
 
-  public void setIsActive(boolean isActive) {
-    this.isActive = isActive;
+  public void setActive(boolean active) {
+    this.active = active;
   }
 
+  public Organization getOrganization() {
+    return organization;
+  }
+
+  public void setOrganization(Organization organization) {
+    this.organization = organization;
+  }
+
+  public List<User> getUsers() {
+    return users;
+  }
+
+  public void setUsers(List<User> users) {
+    this.users = users;
+  }
 }

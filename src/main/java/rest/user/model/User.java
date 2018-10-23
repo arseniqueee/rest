@@ -3,6 +3,7 @@ package rest.user.model;
 
 import rest.countries.model.Countries;
 import rest.docs.model.DocsData;
+import rest.office.model.Office;
 
 import javax.persistence.*;
 
@@ -41,6 +42,10 @@ public class User {
 
     @Column(name = "identified", nullable = false)
     private boolean identified;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "office_id", insertable = false, updatable = false)
+    private Office office;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doc_code", insertable = false, updatable = false)
@@ -159,5 +164,13 @@ public class User {
 
     public void setCountries(Countries countries) {
         this.countries = countries;
+    }
+
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
     }
 }
