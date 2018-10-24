@@ -6,6 +6,7 @@ import rest.docs.dao.DocsDao;
 import rest.docs.dao.DocsDataDao;
 import rest.docs.model.Docs;
 import rest.docs.model.DocsData;
+import rest.exception.DocsDataNotFoundException;
 import rest.response.Result;
 import rest.user.dao.UserDao;
 import rest.user.dto.*;
@@ -57,8 +58,12 @@ public class UserSerivceImpl implements UserService {
     @Override
     @Transactional
     public Result save(UserSaveDto dto) {
-        if (docsDataDao.findById(dto.getDocCode()) != null){
-            dao.save(mapper.map(dto, User.class));
+        if (dto.getDocCode() != null){
+            if (docsDataDao.findById(dto.getDocCode()) != null){
+                dao.save(mapper.map(dto, User.class));
+            }else {
+                throw new DocsDataNotFoundException();
+            }
         }else {
             Docs docs = mapper.map(dto, Docs.class);
             if (docsDao.findByCode(docs.getCode()) == null){

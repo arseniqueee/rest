@@ -87,7 +87,9 @@ public class UserTest {
         saveDto.setPosition("New user position");
         saveDto.setSecondName("Second Name");
         saveDto.setCitizenshipCode(632L);
-        saveDto.setDocCode(1L);
+        saveDto.setDocNumber(10L);
+        saveDto.setDocName("Pasport");
+        saveDto.setDocDate(docDate);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
