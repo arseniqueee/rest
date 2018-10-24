@@ -2,6 +2,8 @@ package rest.organization.service;
 
 import rest.organization.dto.*;
 import rest.organization.model.Organization;
+import rest.response.Result;
+
 import java.util.List;
 
 public interface OrganizationService {
@@ -10,7 +12,7 @@ public interface OrganizationService {
 
     OrganizationFullDto findById(Long id);
 
-    void save(OrganizationSaveDto organization);
+    Result save(OrganizationSaveDto organization);
 
-    void update(OrganizationUpdateDto dto);
+    Result update(OrganizationUpdateDto dto);
 }

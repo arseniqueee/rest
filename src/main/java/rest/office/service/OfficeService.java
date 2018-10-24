@@ -2,6 +2,7 @@ package rest.office.service;
 
 import rest.office.dto.*;
 import rest.office.model.Office;
+import rest.response.Result;
 
 import java.util.List;
 
@@ -11,9 +12,9 @@ public interface OfficeService {
 
     OfficeItemDto findById(Long id);
 
-    void update(OfficeUpdateDto dto);
+    Result update(OfficeUpdateDto dto);
 
-    void save(OfficeSaveDto office);
+    Result save(OfficeSaveDto office);
 
 
 }

@@ -6,6 +6,7 @@ import rest.office.dao.OfficeDao;
 import rest.office.dto.*;
 import rest.office.mapper.OfficeMapper;
 import rest.office.model.Office;
+import rest.response.Result;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -37,13 +38,15 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     @Transactional
-    public void update(OfficeUpdateDto dto) {
+    public Result update(OfficeUpdateDto dto) {
         dao.update(mapper.map(dto, Office.class));
+        return new Result("success");
     }
 
     @Override
     @Transactional
-    public void save(OfficeSaveDto office) {
+    public Result save(OfficeSaveDto office) {
         dao.save(mapper.map(office, Office.class));
+        return new Result("success");
     }
 }

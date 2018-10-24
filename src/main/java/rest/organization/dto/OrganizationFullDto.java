@@ -16,12 +16,12 @@ public class OrganizationFullDto {
 
     private String phone;
 
-    private Boolean isActive;
+    private boolean active;
 
     public OrganizationFullDto() {
     }
 
-    public OrganizationFullDto(Long id, String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
+    public OrganizationFullDto(Long id, String name, String fullName, String inn, String kpp, String address, String phone, boolean active) {
         this.id = id;
         this.name = name;
         this.fullName = fullName;
@@ -29,7 +29,7 @@ public class OrganizationFullDto {
         this.kpp = kpp;
         this.address = address;
         this.phone = phone;
-        this.isActive = isActive;
+        this.active = active;
     }
 
     public Long getId() {
@@ -88,11 +88,11 @@ public class OrganizationFullDto {
         this.phone = phone;
     }
 
-    public Boolean getActive() {
-        return isActive;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

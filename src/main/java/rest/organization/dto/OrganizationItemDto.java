@@ -6,12 +6,12 @@ public class OrganizationItemDto {
 
     private String name;
 
-    private Boolean active;
+    private boolean active;
 
     public OrganizationItemDto() {
     }
 
-    public OrganizationItemDto(long id, String name, Boolean active) {
+    public OrganizationItemDto(long id, String name, boolean active) {
         this.id = id;
         this.name = name;
         this.active = active;
@@ -33,11 +33,11 @@ public class OrganizationItemDto {
         this.name = name;
     }
 
-    public Boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 }

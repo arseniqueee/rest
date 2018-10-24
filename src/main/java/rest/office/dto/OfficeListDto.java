@@ -8,16 +8,16 @@ public class OfficeListDto {
 
     private String phone;
 
-    private boolean isActive;
+    private boolean active;
 
     public OfficeListDto() {
     }
 
-    public OfficeListDto(Long orgId, String name, String phone, boolean isActive) {
+    public OfficeListDto(Long orgId, String name, String phone, boolean active) {
         this.orgId = orgId;
         this.name = name;
         this.phone = phone;
-        this.isActive = isActive;
+        this.active = active;
     }
 
     public Long getOrgId() {
@@ -45,10 +45,10 @@ public class OfficeListDto {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 }

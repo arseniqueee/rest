@@ -13,6 +13,8 @@ public class UserSaveDto {
 
     private String firstName;
 
+    private Long officeId;
+
     private String secondName;
 
     private String middleName;
@@ -115,5 +117,13 @@ public class UserSaveDto {
 
     public void setIdentified(boolean identified) {
         this.identified = identified;
+    }
+
+    public Long getOfficeId() {
+        return officeId;
+    }
+
+    public void setOfficeId(Long officeId) {
+        this.officeId = officeId;
     }
 }

@@ -10,17 +10,17 @@ public class OfficeSaveDto {
 
     private String phone;
 
-    private boolean isActive;
+    private boolean active;
 
     public OfficeSaveDto() {
     }
 
-    public OfficeSaveDto(Long orgId, String name, String address, String phone, boolean isActive) {
+    public OfficeSaveDto(Long orgId, String name, String address, String phone, boolean active) {
         this.orgId = orgId;
         this.name = name;
         this.address = address;
         this.phone = phone;
-        this.isActive = isActive;
+        this.active = active;
     }
 
     public Long getOrgId() {
@@ -56,10 +56,10 @@ public class OfficeSaveDto {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 }

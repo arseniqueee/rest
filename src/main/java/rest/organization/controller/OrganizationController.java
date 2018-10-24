@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import rest.organization.dto.*;
 import rest.organization.model.Organization;
 import rest.organization.service.OrganizationService;
+import rest.response.Result;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,14 +44,14 @@ public class OrganizationController {
 
     @PostMapping(value = "/save", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Save organization")
-    public void save(@RequestBody  OrganizationSaveDto dto) {
-        service.save(dto);
+    public Result save(@RequestBody  OrganizationSaveDto dto) {
+        return service.save(dto);
     }
 
     @PostMapping(value = "/update", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Update organization")
-    public void update(@RequestBody OrganizationUpdateDto dto) {
-        service.update(dto);
+    public Result update(@RequestBody OrganizationUpdateDto dto) {
+        return service.update(dto);
     }
 
 }

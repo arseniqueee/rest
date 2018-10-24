@@ -6,6 +6,8 @@ import rest.organization.dto.*;
 import rest.organization.mapper.OrganizationMapper;
 import rest.organization.model.Organization;
 import rest.organization.dao.OrganizationDao;
+import rest.response.Result;
+
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public List<OrganizationItemDto> findAll(OrganizationListDto dto) {
-        List<Organization> a = dao.getAll(dto.getInn(), dto.getName(), dto.getActive());
+        List<Organization> a = dao.getAll(dto.getInn(), dto.getName(), dto.isActive());
         return mapper.mapAsList(a, OrganizationItemDto.class);
     }
 
@@ -36,16 +38,18 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     @Transactional
-    public void save(OrganizationSaveDto organization)
+    public Result save(OrganizationSaveDto organization)
     {
         Organization organization1 = mapper.map(organization, Organization.class);
         dao.save(organization1);
+        return new Result("success");
     }
 
     @Override
     @Transactional
-    public void update(OrganizationUpdateDto dto) {
+    public Result update(OrganizationUpdateDto dto) {
         Organization organization = mapper.map(dto, Organization.class);
         dao.update(organization);
+        return new Result("success");
     }
 }

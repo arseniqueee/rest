@@ -6,15 +6,15 @@ public class OfficeListOutDto {
 
     private String name;
 
-    private boolean isActive;
+    private boolean active;
 
     public OfficeListOutDto() {
     }
 
-    public OfficeListOutDto(Long id, String name, boolean isActive) {
+    public OfficeListOutDto(Long id, String name, boolean active) {
         this.id = id;
         this.name = name;
-        this.isActive = isActive;
+        this.active = active;
     }
 
     public Long getId() {
@@ -34,10 +34,10 @@ public class OfficeListOutDto {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 }

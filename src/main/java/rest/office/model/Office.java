@@ -28,7 +28,7 @@ public class Office {
   @Column(name = "phone", length = 12, nullable = false)
   private String phone;
 
-  @Column(name = "is_active")
+  @Column(name = "active", nullable = false)
   private boolean active;
 
   @ManyToOne

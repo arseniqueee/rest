@@ -12,18 +12,18 @@ public class OfficeItemDto {
 
     private String phone;
 
-    private boolean isActive;
+    private boolean active;
 
     public OfficeItemDto() {
     }
 
-    public OfficeItemDto(Long id, Long orgId, String name, String address, String phone, boolean isActive) {
+    public OfficeItemDto(Long id, Long orgId, String name, String address, String phone, boolean active) {
         this.id = id;
         this.orgId = orgId;
         this.name = name;
         this.address = address;
         this.phone = phone;
-        this.isActive = isActive;
+        this.active = active;
     }
 
     public Long getId() {
@@ -67,10 +67,10 @@ public class OfficeItemDto {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 }

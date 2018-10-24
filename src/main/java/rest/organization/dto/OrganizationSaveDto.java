@@ -14,19 +14,19 @@ public class OrganizationSaveDto {
 
     private String phone;
 
-    private Boolean isActive;
+    private boolean active;
 
     public OrganizationSaveDto() {
     }
 
-    public OrganizationSaveDto(String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
+    public OrganizationSaveDto(String name, String fullName, String inn, String kpp, String address, String phone, boolean active) {
         this.name = name;
         this.fullName = fullName;
         this.inn = inn;
         this.kpp = kpp;
         this.address = address;
         this.phone = phone;
-        this.isActive = isActive;
+        this.active = active;
     }
 
     public String getName() {
@@ -77,11 +77,13 @@ public class OrganizationSaveDto {
         this.phone = phone;
     }
 
-    public Boolean getActive() {
-        return isActive;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setActive(boolean active) {
+        this.active = active;
     }
+
+
 }

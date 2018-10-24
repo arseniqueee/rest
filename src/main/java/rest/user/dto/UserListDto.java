@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotNull;
 import java.security.acl.LastOwnerException;
 
+
 public class UserListDto {
 
     private Long officeId;

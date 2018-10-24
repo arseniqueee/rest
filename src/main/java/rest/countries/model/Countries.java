@@ -3,9 +3,14 @@ package rest.countries.model;
 
 import javax.persistence.*;
 
+
+/**
+ * Country entity
+ */
 @Entity
 @Table(name = "country")
 public class Countries {
+
 
     @Id
     @GeneratedValue

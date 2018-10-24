@@ -12,15 +12,15 @@ public class OrganizationListDto {
 
     private String inn;
 
-    private Boolean isActive;
+    private boolean active;
 
     public OrganizationListDto() {
     }
 
-    public OrganizationListDto(String name, String inn, Boolean isActive) {
+    public OrganizationListDto(String name, String inn, boolean active) {
         this.name = name;
         this.inn = inn;
-        this.isActive = isActive;
+        this.active = active;
     }
 
     public String getName() {
@@ -39,11 +39,11 @@ public class OrganizationListDto {
         this.inn = inn;
     }
 
-    public Boolean getActive() {
-        return isActive;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

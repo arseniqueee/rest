@@ -21,8 +21,8 @@ public class OrhanizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public List<Organization> getAll(String inn, String name, boolean isActive) {
-        String query = "SELECT h from Organization h where h.name = :name and h.isActive = :isActive ";
+    public List<Organization> getAll(String inn, String name, boolean active) {
+        String query = "SELECT h from Organization h where h.name = :name and h.active = :active ";
         if (inn != null) {
             query += "and h.inn = :inn";
         }
@@ -31,7 +31,7 @@ public class OrhanizationDaoImpl implements OrganizationDao {
             queryfinal.setParameter("inn", inn);
         }
         queryfinal.setParameter("name", name);
-        queryfinal.setParameter("isActive", isActive);
+        queryfinal.setParameter("active", active);
         return queryfinal.getResultList();
     }
 
@@ -54,7 +54,7 @@ public class OrhanizationDaoImpl implements OrganizationDao {
         org.setInn(organization.getInn());
         org.setFullName(organization.getFullName());
         org.setName(organization.getName());
-        org.setActive(organization.getActive());
+        org.setActive(organization.isActive());
         entityManager.persist(org);
     }
 }

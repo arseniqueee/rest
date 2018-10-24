@@ -31,11 +31,11 @@ public class Organization {
     @Column(name = "address", length = 100, nullable = false)
     private String address;
 
-    @Column(name = "phone", length = 12, nullable = false)
+    @Column(name = "phone", length = 12, nullable = true)
     private String phone;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
+    @Column(name = "active", nullable = false)
+    private boolean active;
 
     @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
     private List<Office> offices;
@@ -44,14 +44,14 @@ public class Organization {
 
     }
 
-    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
+    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, boolean active) {
         this.name = name;
         this.fullName = fullName;
         this.inn = inn;
         this.kpp = kpp;
         this.address = address;
         this.phone = phone;
-        this.isActive = isActive;
+        this.active = active;
     }
 
     public Long getId() {
@@ -110,11 +110,11 @@ public class Organization {
         this.phone = phone;
     }
 
-    public Boolean getActive() {
-        return isActive;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

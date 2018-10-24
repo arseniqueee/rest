@@ -7,7 +7,9 @@ import rest.countries.dao.CountriesDao;
 
 import java.util.List;
 
-
+/**
+ * Country service
+ */
 @Service
 public class CountriesServiceImpl implements CountriesService {
 
@@ -17,6 +19,7 @@ public class CountriesServiceImpl implements CountriesService {
     public CountriesServiceImpl(CountriesDao dao) {
         this.dao = dao;
     }
+
 
     @Override
     public List<Countries> getList() {

@@ -11,6 +11,7 @@ import rest.office.mapper.OfficeMapper;
 import rest.office.model.Office;
 import rest.office.service.OfficeService;
 import rest.organization.service.OrganizationService;
+import rest.response.Result;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -25,14 +26,11 @@ public class OfficeController {
 
     private final OfficeService service;
 
-    private final OrganizationService organizationService;
-
     private final OfficeMapper mapper;
 
     @Autowired
-    public OfficeController(OfficeService service, OrganizationService organizationService, OfficeMapper mapper) {
+    public OfficeController(OfficeService service, OfficeMapper mapper) {
         this.service = service;
-        this.organizationService = organizationService;
         this.mapper = mapper;
     }
 
@@ -43,7 +41,7 @@ public class OfficeController {
         return list;
     }
 
-    @GetMapping(value = "/{id}", consumes = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get office by id")
     public OfficeItemDto getOffice(@PathVariable(value = "id") Long id){
         return service.findById(id);
@@ -51,13 +49,13 @@ public class OfficeController {
 
     @PostMapping("/update")
     @ApiOperation(value = "Update office")
-    public void updateOffice(@RequestBody @Validated OfficeUpdateDto dto){
-        service.update(dto);
+    public Result updateOffice(@RequestBody @Validated OfficeUpdateDto dto){
+        return  service.update(dto);
     }
 
     @PostMapping(value = "/save", produces = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Save office")
-    public void saveOffice(@RequestBody OfficeSaveDto dto){
-        service.save(dto);
+    public Result saveOffice(@RequestBody OfficeSaveDto dto){
+        return service.save(dto);
     }
 }

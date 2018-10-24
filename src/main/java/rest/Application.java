@@ -9,7 +9,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @ComponentScan
 @EnableAutoConfiguration
-@Configuration
 @EnableSwagger2
 public class Application {
 

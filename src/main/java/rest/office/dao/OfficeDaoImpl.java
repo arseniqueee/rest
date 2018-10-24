@@ -22,8 +22,8 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public List<Office> findByIdOrg(Long id, String name, String phone, boolean isActive) {
-        String query = "SELECT o from Office o where o.orgId = :orgId and o.isActive = :isActive ";
+    public List<Office> findByIdOrg(Long id, String name, String phone, boolean active) {
+        String query = "SELECT o from Office o where o.orgId = :orgId and o.active = :active ";
         if (name != null){
             query += "and o.name = :name ";
         }
@@ -38,7 +38,7 @@ public class OfficeDaoImpl implements OfficeDao {
             result.setParameter("phone", phone);
         }
         result.setParameter("orgId", id);
-        result.setParameter("isActive", isActive);
+        result.setParameter("active", active);
         return result.getResultList();
     }
 
