@@ -11,23 +11,41 @@ import java.util.List;
 @Table(name = "office")
 public class Office {
 
+  /**
+   * Office id
+   */
   @Id
   @GeneratedValue
   @Column(name = "id", length = 20)
   private Long id;
 
+  /**
+   * Organization id
+   */
   @Column(name = "org_id", length = 20, nullable = false)
   private Long orgId;
 
+  /**
+   * Office name
+   */
   @Column(name = "name", length = 100, nullable = false)
   private String name;
 
+  /**
+   * Office address
+   */
   @Column(name = "address",length = 100, nullable = false)
   private String address;
 
+  /**
+   * Office phone
+   */
   @Column(name = "phone", length = 12, nullable = false)
   private String phone;
 
+  /**
+   * Office active
+   */
   @Column(name = "active", nullable = false)
   private boolean active;
 

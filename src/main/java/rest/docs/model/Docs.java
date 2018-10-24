@@ -7,10 +7,16 @@ import javax.persistence.*;
 @Table(name = "docs")
 public class Docs {
 
+    /**
+     * Docs id
+     */
     @Id
     @Column(name = "code")
     private Long code;
 
+    /**
+     * Docs name
+     */
     @Column(name = "name")
     private String name;
 

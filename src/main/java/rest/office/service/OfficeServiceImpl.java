@@ -11,6 +11,9 @@ import rest.response.Result;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * Office service
+ */
 @Service
 public class OfficeServiceImpl implements OfficeService {
 
@@ -24,18 +27,33 @@ public class OfficeServiceImpl implements OfficeService {
         this.mapper = mapper;
     }
 
+    /**
+     * List offices with filter dto
+     * @param dto filter dto
+     * @return list dto
+     */
     @Override
     public List<OfficeListOutDto> findByIdOrg(OfficeListDto dto) {
         List<Office> offices = dao.findByIdOrg(dto.getOrgId(), dto.getName(), dto.getPhone(), dto.isActive());
         return mapper.mapAsList(offices, OfficeListOutDto.class);
     }
 
+    /**
+     * Find office by id
+     * @param id Office id
+     * @return dto office item
+     */
     @Override
     public OfficeItemDto findById(Long id) {
         Office office = dao.findById(id);
         return mapper.map(office, OfficeItemDto.class);
     }
 
+    /**
+     * Update office
+     * @param dto update dto
+     * @return result
+     */
     @Override
     @Transactional
     public Result update(OfficeUpdateDto dto) {
@@ -43,6 +61,11 @@ public class OfficeServiceImpl implements OfficeService {
         return new Result("success");
     }
 
+    /**
+     * Save office
+     * @param office save dto
+     * @return result
+     */
     @Override
     @Transactional
     public Result save(OfficeSaveDto office) {

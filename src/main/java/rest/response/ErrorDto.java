@@ -1,5 +1,8 @@
 package rest.response;
 
+/**
+ * Error dto for result
+ */
 public class ErrorDto {
 
     private String error;

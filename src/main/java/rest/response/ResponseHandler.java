@@ -18,6 +18,9 @@ import rest.exception.UserNotFoundException;
 import java.io.Writer;
 import java.util.List;
 
+/**
+ * Exception handler and response mapper
+ */
 @ControllerAdvice(basePackages = "rest")
 public class ResponseHandler implements ResponseBodyAdvice<Object>{
 

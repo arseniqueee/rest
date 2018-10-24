@@ -10,6 +10,10 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
+
+/**
+ * Document repository
+ */
 @Repository
 public class DocsDaoImpl implements DocsDao {
 
@@ -32,6 +36,11 @@ public class DocsDaoImpl implements DocsDao {
 
     }
 
+
+    /**
+     *
+     * @param docs Docs entity for save
+     */
     @Override
     @Transactional
     public void saveDocs(Docs docs) {
@@ -41,6 +50,11 @@ public class DocsDaoImpl implements DocsDao {
         em.persist(docsNew);
     }
 
+    /**
+     *
+     * @param code Document code
+     * @return document entity
+     */
     @Override
     public Docs findByCode(Long code) {
         return em.find(Docs.class, code);

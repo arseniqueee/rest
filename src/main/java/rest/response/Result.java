@@ -1,5 +1,8 @@
 package rest.response;
 
+/**
+ * Result class
+ */
 public class Result {
 
     private String result;

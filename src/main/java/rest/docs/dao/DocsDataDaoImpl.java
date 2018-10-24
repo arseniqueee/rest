@@ -21,11 +21,20 @@ public class DocsDataDaoImpl implements DocsDataDao {
         this.manager = manager;
     }
 
+    /**
+     * Find DocsData by id
+     * @param id document data id
+     * @return DocsData entity
+     */
     @Override
     public DocsData findById(Long id) {
         return manager.find(DocsData.class, id);
     }
 
+    /**
+     * Save DocsData
+     * @param data Entity for save
+     */
     @Override
     @Transactional
     public void save(DocsData data) {
@@ -36,6 +45,10 @@ public class DocsDataDaoImpl implements DocsDataDao {
         manager.persist(dataNew);
     }
 
+    /**
+     * Find last row in DocsData table
+     * @return DocsData entity
+     */
     @Override
     public DocsData findLast() {
         String query = "select u from DocsData u order by u.id desc";

@@ -19,6 +19,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * Office controller
+ */
 @RestController
 @RequestMapping(value = "/office")
 @Api(tags = "Office controller")
@@ -34,6 +38,11 @@ public class OfficeController {
         this.mapper = mapper;
     }
 
+    /**
+     * List office
+     * @param dto dto filter for request
+     * @return list office
+     */
     @PostMapping(value = "/list", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get office`s list")
     public List<OfficeListOutDto> getList(@RequestBody OfficeListDto dto){
@@ -41,18 +50,33 @@ public class OfficeController {
         return list;
     }
 
+    /**
+     * Get office by id
+     * @param id Office id
+     * @return Dto office item
+     */
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get office by id")
     public OfficeItemDto getOffice(@PathVariable(value = "id") Long id){
         return service.findById(id);
     }
 
+    /**
+     * Update office
+     * @param dto dto filter for update
+     * @return result
+     */
     @PostMapping("/update")
     @ApiOperation(value = "Update office")
     public Result updateOffice(@RequestBody @Validated OfficeUpdateDto dto){
         return  service.update(dto);
     }
 
+    /**
+     * Save office
+     * @param dto dto filter for save
+     * @return result
+     */
     @PostMapping(value = "/save", produces = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Save office")
     public Result saveOffice(@RequestBody OfficeSaveDto dto){

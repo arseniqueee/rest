@@ -16,6 +16,9 @@ import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * Organization controller
+ */
 @RestController
 @RequestMapping(value = "/organization")
 @Api(tags = "Organization controller")

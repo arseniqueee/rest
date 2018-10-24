@@ -1,8 +1,10 @@
 package rest.response;
 
 
-
-
+/**
+ * Response class
+ * @param <T>
+ */
 public class Response<T> {
 
     private T data;

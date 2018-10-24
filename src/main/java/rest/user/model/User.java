@@ -7,39 +7,72 @@ import rest.office.model.Office;
 
 import javax.persistence.*;
 
+/**
+ * User entity
+ */
 @Entity
 @Table(name = "user")
 public class User {
 
+    /**
+     * User id
+     */
     @Id
     @GeneratedValue
     @Column(name = "id", length = 20)
     private Long id;
 
+    /**
+     * User office id
+     */
     @Column(name = "office_id", length = 20, nullable = false)
     private Long officeId;
 
+    /**
+     * Fist name user
+     */
     @Column(name = "first_name", length = 100, nullable = false)
     private String firstName;
 
+    /**
+     * Last name user
+     */
     @Column(name = "last_name", length = 100, nullable = false)
     private String lastName;
 
+    /**
+     * Second name user
+     */
     @Column(name = "second_name", length = 100, nullable = false)
     private String secondName;
 
+    /**
+     * Middle name user
+     */
     @Column(name = "middle_name", length = 100, nullable = false)
     private String middleName;
 
+    /**
+     * Position of user
+     */
     @Column(name = "position", length = 50, nullable = false)
     private String position;
 
+    /**
+     * Binding code user-document
+     */
     @Column(name = "doc_code", nullable = false)
     private Long docCode;
 
+    /**
+     * City code
+     */
     @Column(name = "city_code", nullable = false)
     private Long citizenshipCode;
 
+    /**
+     * Identified user
+     */
     @Column(name = "identified", nullable = false)
     private boolean identified;
 

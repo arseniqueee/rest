@@ -14,6 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * Document controller
+ */
 @RestController
 @RequestMapping(value = "/docs")
 @Api(tags = "Document controller")

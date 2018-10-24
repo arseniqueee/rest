@@ -12,6 +12,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+/**
+ * User repository
+ */
 @Repository
 public class UserDaoImpl implements  UserDao {
 
@@ -25,7 +28,17 @@ public class UserDaoImpl implements  UserDao {
 
     }
 
-
+    /**
+     * Find users by filter
+     * @param officeId office id
+     * @param firstName full name user
+     * @param lastName last name user
+     * @param middleName middle name user
+     * @param position position of user
+     * @param docCode document code user
+     * @param citizenshipCode city code
+     * @return
+     */
     @Override
     public List<User> findAll(Long officeId, String firstName, String lastName, String middleName, String position, Long docCode, Long citizenshipCode) {
         String query = "SELECT u FROM User u WHERE u.officeId = :officeId ";
@@ -70,11 +83,20 @@ public class UserDaoImpl implements  UserDao {
         return result.getResultList();
     }
 
+    /**
+     * Find user by id
+     * @param id User id
+     * @return User entity
+     */
     @Override
     public User findById(Long id) {
         return manager.find(User.class, id);
     }
 
+    /**
+     * Update user
+     * @param user User entity
+     */
     @Override
     public void update(User user) {
         User us = new User();
@@ -99,6 +121,11 @@ public class UserDaoImpl implements  UserDao {
         manager.persist(us);
     }
 
+
+    /**
+     * Save user
+     * @param user User entity
+     */
     @Override
     public void save(User user) {
         User userNew = new User();

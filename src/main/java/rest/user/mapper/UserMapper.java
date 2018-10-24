@@ -7,6 +7,9 @@ import rest.docs.model.Docs;
 import rest.user.dto.*;
 import rest.user.model.User;
 
+/**
+ * User mapper
+ */
 @Component
 public class UserMapper extends ConfigurableMapper {
 

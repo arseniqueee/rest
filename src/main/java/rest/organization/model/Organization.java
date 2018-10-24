@@ -7,33 +7,60 @@ import rest.office.model.Office;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Organization entity
+ */
 @Entity
 @Table(name = "organization")
 public class Organization {
 
+    /**
+     * Organization id
+     */
     @Id
     @GeneratedValue
     @Column(name = "id", length = 20)
     private Long id;
 
+    /**
+     * Organization name
+     */
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
+    /**
+     * Organization full name
+     */
     @Column(name = "full_name", length = 100, nullable = false)
     private String fullName;
 
+    /**
+     * Organization inn
+     */
     @Column(name = "inn", length = 12, nullable = false)
     private String inn;
 
+    /**
+     * Organization kpp
+     */
     @Column(name = "kpp", length = 9, nullable = false)
     private String kpp;
 
+    /**
+     * Organization address
+     */
     @Column(name = "address", length = 100, nullable = false)
     private String address;
 
+    /**
+     * Organization phone
+     */
     @Column(name = "phone", length = 12, nullable = true)
     private String phone;
 
+    /**
+     * Organization active
+     */
     @Column(name = "active", nullable = false)
     private boolean active;
 

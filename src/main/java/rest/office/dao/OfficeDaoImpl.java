@@ -21,6 +21,14 @@ public class OfficeDaoImpl implements OfficeDao {
         this.em = em;
     }
 
+    /**
+     * Find offices
+     * @param id Office id
+     * @param name Office name
+     * @param phone Office phone
+     * @param active Office active
+     * @return list offices
+     */
     @Override
     public List<Office> findByIdOrg(Long id, String name, String phone, boolean active) {
         String query = "SELECT o from Office o where o.orgId = :orgId and o.active = :active ";
@@ -42,16 +50,29 @@ public class OfficeDaoImpl implements OfficeDao {
         return result.getResultList();
     }
 
+    /**
+     * Find office by id
+     * @param id Office id
+     * @return Office entity
+     */
     @Override
     public Office findById(Long id) {
         return em.find(Office.class, id);
     }
 
+    /**
+     * Save office
+     * @param office Office entity
+     */
     @Override
     public void save(Office office) {
         em.persist(office);
     }
 
+    /**
+     * Update office
+     * @param office Office entity
+     */
     @Override
     public void update(Office office) {
         Office of = em.find(Office.class, office.getId());

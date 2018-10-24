@@ -9,7 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-
+/**
+ * Organization repository
+ */
 @Repository
 public class OrhanizationDaoImpl implements OrganizationDao {
 
@@ -20,6 +22,13 @@ public class OrhanizationDaoImpl implements OrganizationDao {
         this.entityManager = entityManager;
     }
 
+    /**
+     * Get list organizations
+     * @param inn inn of organization
+     * @param name name of organization
+     * @param active active of organization
+     * @return list organizations
+     */
     @Override
     public List<Organization> getAll(String inn, String name, boolean active) {
         String query = "SELECT h from Organization h where h.name = :name and h.active = :active ";
@@ -35,16 +44,29 @@ public class OrhanizationDaoImpl implements OrganizationDao {
         return queryfinal.getResultList();
     }
 
+    /**
+     * Get organization by id
+     * @param id Organization id
+     * @return Organization entity
+     */
     @Override
     public Organization getById(Long id) {
         return entityManager.find(Organization.class, id);
     }
 
+    /**
+     * Save organization
+     * @param organization Organization entity
+     */
     @Override
     public void save(Organization organization){
         entityManager.persist(organization);
     }
 
+    /**
+     * Update organization
+     * @param organization Organization entity
+     */
     @Override
     public void update(Organization organization) {
         Organization org = entityManager.find(Organization.class, organization.getId());

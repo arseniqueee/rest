@@ -20,7 +20,10 @@ public class DocsServiceImpl implements DocsService {
         this.dao = dao;
     }
 
-
+    /**
+     * List documents
+     * @return List of documents
+     */
     @Override
     public List<Docs> findAll() {
         return dao.getList();

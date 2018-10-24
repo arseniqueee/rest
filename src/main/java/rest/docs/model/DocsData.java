@@ -9,18 +9,30 @@ import java.util.Date;
 @Table(name = "docs_data")
 public class DocsData {
 
+    /**
+     * DocsData id
+     */
     @Id
     @GeneratedValue
     @Column(name = "id")
     private Long id;
 
+    /**
+     * Docs code
+     */
     @Column(name = "docs_code", nullable = false)
     private Long docsCode;
 
+    /**
+     * Add date DocsData
+     */
     @Column(name = "date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date date;
 
+    /**
+     * User id
+     */
     @Column(name = "user_id", nullable = false)
     private Long userId;
 

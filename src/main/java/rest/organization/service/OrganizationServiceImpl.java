@@ -12,6 +12,9 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Organization service
+ */
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
 
@@ -25,17 +28,32 @@ public class OrganizationServiceImpl implements OrganizationService {
         this.mapper = mapper;
     }
 
+    /**
+     * Get organizations by filter
+     * @param dto filter dto
+     * @return list dto items
+     */
     @Override
     public List<OrganizationItemDto> findAll(OrganizationListDto dto) {
         List<Organization> a = dao.getAll(dto.getInn(), dto.getName(), dto.isActive());
         return mapper.mapAsList(a, OrganizationItemDto.class);
     }
 
+    /**
+     * Get organization by id
+     * @param id Organization id
+     * @return dto item organization
+     */
     @Override
     public OrganizationFullDto findById(Long id) {
         return mapper.map(dao.getById(id), OrganizationFullDto.class);
     }
 
+    /**
+     * Save organization
+     * @param organization save dto organization
+     * @return result
+     */
     @Override
     @Transactional
     public Result save(OrganizationSaveDto organization)
@@ -45,6 +63,11 @@ public class OrganizationServiceImpl implements OrganizationService {
         return new Result("success");
     }
 
+    /**
+     * Update organization
+     * @param dto update dto organization
+     * @return result
+     */
     @Override
     @Transactional
     public Result update(OrganizationUpdateDto dto) {

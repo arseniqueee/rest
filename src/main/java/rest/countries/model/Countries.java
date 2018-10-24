@@ -11,12 +11,17 @@ import javax.persistence.*;
 @Table(name = "country")
 public class Countries {
 
-
+    /**
+     * Country code
+     */
     @Id
     @GeneratedValue
     @Column(name = "code")
     private Long code;
 
+    /**
+     * Country name
+     */
     @Column(name = "name", length = 50)
     private String name;
 
