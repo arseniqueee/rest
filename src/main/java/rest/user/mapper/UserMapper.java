@@ -4,6 +4,7 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.stereotype.Component;
 import rest.docs.model.Docs;
+import rest.docs.model.DocsData;
 import rest.user.dto.*;
 import rest.user.model.User;
 
@@ -34,10 +35,10 @@ public class UserMapper extends ConfigurableMapper {
                 .byDefault()
                 .register();
 
-        factory.classMap(Docs.class, UserSaveDto.class)
-                .field("code", "docNumber")
-                .field("name", "docName")
-                .byDefault()
-                .register();
+//        factory.classMap(DocsData.class, UserSaveDto.class)
+//                .field("docsNumber", "docNumber")
+//                .field("docsName", "docName")
+//                .byDefault()
+//                .register();
     }
 }

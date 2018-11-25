@@ -7,12 +7,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import rest.docs.dto.DocsListDto;
 import rest.docs.model.Docs;
 import rest.docs.service.DocsService;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
 /**
@@ -33,7 +36,7 @@ public class DocsController {
     @PostMapping
     @ResponseBody
     @ApiOperation(value = "Get doc`s list")
-    public List<Docs> getList(){
+    public List<DocsListDto> getList(){
         return service.findAll();
     }
 }

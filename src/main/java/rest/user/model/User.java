@@ -18,7 +18,7 @@ public class User {
      * User id
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", length = 20)
     private Long id;
 
@@ -37,7 +37,7 @@ public class User {
     /**
      * Last name user
      */
-    @Column(name = "last_name", length = 100, nullable = false)
+    @Column(name = "last_name", length = 100, nullable = true)
     private String lastName;
 
     /**
@@ -61,7 +61,7 @@ public class User {
     /**
      * Binding code user-document
      */
-    @Column(name = "doc_code", nullable = false)
+    @Column(name = "doc_code", nullable = true)
     private Long docCode;
 
     /**

@@ -41,6 +41,7 @@ public class UserSerivceImpl implements UserService {
 
     /**
      * Find user by filter
+     *
      * @param dto filter dto
      * @return list of users
      */
@@ -52,6 +53,7 @@ public class UserSerivceImpl implements UserService {
 
     /**
      * Find user by id
+     *
      * @param id User id
      * @return item dto user
      */
@@ -63,6 +65,7 @@ public class UserSerivceImpl implements UserService {
 
     /**
      * Update user
+     *
      * @param dto update user dto
      * @return result
      */
@@ -75,30 +78,41 @@ public class UserSerivceImpl implements UserService {
 
     /**
      * Save user
+     *
      * @param dto save dto user
      * @return result
      */
     @Override
     @Transactional
     public Result save(UserSaveDto dto) {
-        if (dto.getDocCode() != null){
-            if (docsDataDao.findById(dto.getDocCode()) != null){
-                dao.save(mapper.map(dto, User.class));
-            }else {
-                throw new DocsDataNotFoundException();
-            }
-        }else {
-            Docs docs = mapper.map(dto, Docs.class);
-            if (docsDao.findByCode(docs.getCode()) == null){
-                docsDao.saveDocs(docs);
-            }
-            dao.save(mapper.map(dto, User.class));
-            DocsData data = new DocsData(dto.getDocNumber(), new Date(), dao.findLast().getId());
+        if (docsDao.findByCode(dto.getDocCode()) != null) {
+            DocsData data = new DocsData(dto.getDocCode(), new Date(), dto.getDocNumber());
             docsDataDao.save(data);
-            User user = dao.findLast();
-            user.setDocCode(docsDataDao.findLast().getId());
+            User user = mapper.map(dto, User.class);
+            DocsData data1 = docsDataDao.findLast();
+            user.setDocCode(data1.getId());
             dao.save(user);
+        }else {
+            throw new DocsDataNotFoundException();
         }
+//        if (dto.getDocCode() != null){
+//            if (docsDataDao.findById(dto.getDocCode()) != null){
+//                dao.save(mapper.map(dto, User.class));
+//            }else {
+//                throw new DocsDataNotFoundException();
+//            }
+//        }else {
+//            Docs docs = mapper.map(dto, Docs.class);
+//            if (docsDao.findByCode(docs.getCode()) == null){
+//                docsDao.saveDocs(docs);
+//            }
+//            dao.save(mapper.map(dto, User.class));
+//            DocsData data = new DocsData(dto.getDocNumber(), new Date());
+//            docsDataDao.save(data);
+//            User user = dao.findLast();
+//            user.setDocCode(docsDataDao.findLast().getId());
+//            dao.save(user);
+//        }
         return new Result("success");
     }
 }

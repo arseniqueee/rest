@@ -29,7 +29,7 @@ import static org.junit.Assert.assertEquals;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {Application.class, DocsController.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = {Application.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DocsTest {
 
     @Autowired
@@ -50,6 +50,6 @@ public class DocsTest {
         ResponseEntity<Response<List<Docs>>> res = restTemplate.exchange(uc.toUriString(), HttpMethod.POST, req, new ParameterizedTypeReference<Response<List<Docs>>>() {});
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
-        assertThat(res.getBody().getData(), hasSize(4));
+        assertThat(res.getBody().getData(), hasSize(1));
     }
 }

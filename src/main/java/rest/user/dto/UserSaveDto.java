@@ -25,8 +25,6 @@ public class UserSaveDto {
 
     private Date docDate;
 
-    private String docName;
-
     private Long docNumber;
 
     private Long citizenshipCode;
@@ -85,14 +83,6 @@ public class UserSaveDto {
 
     public void setDocDate(Date docDate) {
         this.docDate = docDate;
-    }
-
-    public String getDocName() {
-        return docName;
-    }
-
-    public void setDocName(String docName) {
-        this.docName = docName;
     }
 
     public Long getDocNumber() {

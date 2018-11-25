@@ -32,7 +32,7 @@ import static org.junit.Assert.assertEquals;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {Application.class, UserController.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = {Application.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserTest {
 
     @Autowired
@@ -54,7 +54,7 @@ public class UserTest {
         ResponseEntity<Response<List<UserListOutDto>>> res = restTemplate.exchange(uc.toUriString(), HttpMethod.POST, req, new ParameterizedTypeReference<Response<List<UserListOutDto>>>() {});
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
-        assertThat(res.getBody().getData(), hasSize(1));
+        assertThat(res.getBody().getData(), hasSize(2));
 
     }
 
@@ -80,19 +80,20 @@ public class UserTest {
                 .path("/user/save")
                 .build();
 
-        Date docDate = new Date(21-12-2018);
+        Date docDate = new Date(2018-10-12);
 
 
         UserSaveDto saveDto = new UserSaveDto();
-        saveDto.setOfficeId(2L);
+        saveDto.setOfficeId(1L);
         saveDto.setFirstName("New user first name");
         saveDto.setMiddleName("New middleName");
         saveDto.setPosition("New user position");
         saveDto.setSecondName("Second Name");
-        saveDto.setCitizenshipCode(632L);
-        saveDto.setDocNumber(10L);
-        saveDto.setDocName("Pasport");
+        saveDto.setCitizenshipCode(1L);
+        saveDto.setDocNumber(14123412L);
         saveDto.setDocDate(docDate);
+        saveDto.setDocCode(14L);
+
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -111,21 +112,21 @@ public class UserTest {
                 .build();
 
 
-        UserUpdateDto saveDto = new UserUpdateDto ();
-        saveDto.setId(17L);
-        saveDto.setOfficeId(2L);
+        UserUpdateDto saveDto = new UserUpdateDto();
+        saveDto.setId(1L);
+        saveDto.setOfficeId(1L);
         saveDto.setFirstName("Updated user first name");
         saveDto.setMiddleName("New middleName");
         saveDto.setPosition("Updated user position");
         saveDto.setSecondName("Second Name");
-        saveDto.setCitizenshipCode(643L);
+        saveDto.setCitizenshipCode(1L);
         saveDto.setDocCode(1L);
 
 
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<UserUpdateDto > req = new HttpEntity<>(saveDto, headers);
+        HttpEntity<UserUpdateDto> req = new HttpEntity<>(saveDto, headers);
 
         ResponseEntity<Response<Result>> res = restTemplate.exchange(uc.toUriString(), HttpMethod.POST, req, new ParameterizedTypeReference<Response<Result>>() {});
 

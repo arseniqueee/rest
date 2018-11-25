@@ -53,7 +53,7 @@ public class OrganizationTest {
 
         OrganizationListDto listDto = new OrganizationListDto();
         listDto.setActive(true);
-        listDto.setName("213");
+        listDto.setName("New organization");
 
 
         HttpHeaders headers = new HttpHeaders();
@@ -117,7 +117,7 @@ public class OrganizationTest {
                 .build();
 
         OrganizationUpdateDto updateDto = new OrganizationUpdateDto();
-        updateDto.setId(2L);
+        updateDto.setId(1L);
         updateDto.setName("Updated organization");
         updateDto.setFullName("Updated organization");
         updateDto.setAddress("Updated organization address");

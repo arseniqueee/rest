@@ -1,5 +1,6 @@
 package rest.docs.dao;
 
+import rest.docs.dto.DocsListDto;
 import rest.docs.model.Docs;
 import rest.docs.model.DocsData;
 

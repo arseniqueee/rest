@@ -2,6 +2,7 @@ package rest.docs.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "docs")
@@ -20,6 +21,17 @@ public class Docs {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "docs", fetch = FetchType.LAZY)
+    private List<DocsData> docsDatas;
+
+    public Docs() {
+    }
+
+    public Docs(Long code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
     public Long getCode() {
         return code;
     }
@@ -34,5 +46,13 @@ public class Docs {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<DocsData> getDocsDatas() {
+        return docsDatas;
+    }
+
+    public void setDocsDatas(List<DocsData> docsDatas) {
+        this.docsDatas = docsDatas;
     }
 }

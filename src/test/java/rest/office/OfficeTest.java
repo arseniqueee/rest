@@ -31,7 +31,7 @@ import static org.junit.Assert.assertThat;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {Application.class, OfficeController.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = {Application.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class OfficeTest {
 
     @Autowired
@@ -45,6 +45,7 @@ public class OfficeTest {
 
         OfficeListDto filterDto = new OfficeListDto();
         filterDto.setOrgId(1L);
+        filterDto.setActive(true);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -54,7 +55,7 @@ public class OfficeTest {
 
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
-        MatcherAssert.assertThat(res.getBody().getData(), hasSize(4));
+        MatcherAssert.assertThat(res.getBody().getData(), hasSize(1));
     }
 
     @Test
@@ -81,8 +82,8 @@ public class OfficeTest {
         OfficeSaveDto saveDto = new OfficeSaveDto();
         saveDto.setName("New office");
         saveDto.setAddress("New office address");
-        saveDto.setOrgId(2L);
-        saveDto.setPhone(null);
+        saveDto.setOrgId(1L);
+        saveDto.setPhone("+45653312");
         saveDto.setActive(true);
 
         HttpHeaders headers = new HttpHeaders();
@@ -103,11 +104,11 @@ public class OfficeTest {
                 .build();
 
         OfficeUpdateDto updateDto = new OfficeUpdateDto();
-        updateDto.setId(5L);
+        updateDto.setId(1L);
         updateDto.setName("Updated office");
         updateDto.setAddress("Updated office address");
-        updateDto.setOrgId(2L);
-        updateDto.setPhone(null);
+        updateDto.setOrgId(1L);
+        updateDto.setPhone("+63232156478");
         updateDto.setActive(true);
 
         HttpHeaders headers = new HttpHeaders();

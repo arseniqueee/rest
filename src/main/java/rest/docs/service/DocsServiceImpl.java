@@ -4,7 +4,8 @@ package rest.docs.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rest.docs.dao.DocsDao;
-import rest.docs.model.Docs;
+import rest.docs.dto.DocsListDto;
+import rest.docs.mapper.DocsMapper;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -15,9 +16,12 @@ public class DocsServiceImpl implements DocsService {
 
     private final DocsDao dao;
 
+    private final DocsMapper mapper;
+
     @Autowired
-    public DocsServiceImpl(DocsDao dao) {
+    public DocsServiceImpl(DocsDao dao, DocsMapper mapper) {
         this.dao = dao;
+        this.mapper = mapper;
     }
 
     /**
@@ -25,7 +29,7 @@ public class DocsServiceImpl implements DocsService {
      * @return List of documents
      */
     @Override
-    public List<Docs> findAll() {
-        return dao.getList();
+    public List<DocsListDto> findAll() {
+        return mapper.mapAsList(dao.getList(), DocsListDto.class);
     }
 }

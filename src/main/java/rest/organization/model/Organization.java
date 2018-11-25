@@ -18,7 +18,7 @@ public class Organization {
      * Organization id
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", length = 20)
     private Long id;
 

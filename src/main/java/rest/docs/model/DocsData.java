@@ -13,7 +13,7 @@ public class DocsData {
      * DocsData id
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -23,34 +23,32 @@ public class DocsData {
     @Column(name = "docs_code", nullable = false)
     private Long docsCode;
 
+    @Column(name = "docs_number", nullable = false)
+    private Long docsNumber;
+
     /**
      * Add date DocsData
      */
-    @Column(name = "date", nullable = false)
+    @Column(name = "date", nullable = true)
     @Temporal(TemporalType.DATE)
     private Date date;
 
     /**
      * User id
      */
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "docs_code", insertable = false, updatable = false)
     private Docs docs;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", updatable =  false, insertable = false)
-    private User user;
 
     public DocsData() {
     }
 
-    public DocsData(Long docsCode, Date date, Long userId) {
+    public DocsData(Long docsCode, Date date, Long docsNumber) {
         this.docsCode = docsCode;
         this.date = date;
-        this.userId = userId;
+        this.docsNumber = docsNumber;
     }
 
     public Long getId() {
@@ -77,14 +75,6 @@ public class DocsData {
         this.date = date;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public Docs getDocs() {
         return docs;
     }
@@ -93,11 +83,12 @@ public class DocsData {
         this.docs = docs;
     }
 
-    public User getUser() {
-        return user;
+
+    public Long getDocsNumber() {
+        return docsNumber;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setDocsNumber(Long docsNumber) {
+        this.docsNumber = docsNumber;
     }
 }

@@ -41,7 +41,7 @@ public class DocsDataDaoImpl implements DocsDataDao {
         DocsData dataNew = new DocsData();
         dataNew.setDate(data.getDate());
         dataNew.setDocsCode(data.getDocsCode());
-        dataNew.setUserId(data.getUserId());
+        dataNew.setDocsNumber(data.getDocsNumber());
         manager.persist(dataNew);
     }
 
