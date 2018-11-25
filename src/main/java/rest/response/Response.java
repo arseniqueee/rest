@@ -9,12 +9,12 @@ public class Response<T> {
 
     private T data;
 
-
+    public Response() {
+    }
 
     public Response(T data) {
         this.data = data;
     }
-
 
 
     public T getData() {
@@ -29,4 +29,8 @@ public class Response<T> {
         return new Response<>(data);
     }
 
+//    @Override
+//    public String toString() {
+//        return data.toString();
+//    }
 }

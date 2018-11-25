@@ -9,6 +9,14 @@ public class Result {
 
     private ErrorDto error;
 
+    public Result() {
+    }
+
+    public Result(String result, ErrorDto error) {
+        this.result = result;
+        this.error = error;
+    }
+
     public Result(String result) {
         this.result = result;
     }

@@ -1,6 +1,5 @@
 package rest.organization.dao;
 
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import rest.organization.model.Organization;

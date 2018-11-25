@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -13,7 +14,11 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import rest.Application;
 import rest.docs.controller.DocsController;
+import rest.docs.model.Docs;
+import rest.response.Response;
 import rest.user.dto.UserListDto;
+
+import java.util.List;
 
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.isJson;
@@ -40,14 +45,11 @@ public class DocsTest {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<UserListDto> req = new HttpEntity<>(headers);
+        HttpEntity req = new HttpEntity<>(headers);
 
-        ResponseEntity<String> res = restTemplate.postForEntity(uc.toUriString(), req, String.class);
-        String json = res.getBody();
+        ResponseEntity<Response<List<Docs>>> res = restTemplate.exchange(uc.toUriString(), HttpMethod.POST, req, new ParameterizedTypeReference<Response<List<Docs>>>() {});
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
-
-        assertThat(json, isJson());
-        assertThat(json, hasJsonPath("$.data[*]", hasSize(4)));
+        assertThat(res.getBody().getData(), hasSize(4));
     }
 }

@@ -3,6 +3,7 @@ package rest.organization.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import rest.organization.dto.*;
@@ -10,10 +11,12 @@ import rest.organization.model.Organization;
 import rest.organization.service.OrganizationService;
 import rest.response.Result;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
@@ -22,7 +25,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/organization")
 @Api(tags = "Organization controller")
-public class OrganizationController {
+public class OrganizationController implements Serializable {
 
     private final OrganizationService service;
 
@@ -38,7 +41,7 @@ public class OrganizationController {
         return list;
     }
 
-    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get organization by id")
     public OrganizationFullDto getById(@PathVariable(value = "id") Long id) {
         OrganizationFullDto organization = service.findById(id);

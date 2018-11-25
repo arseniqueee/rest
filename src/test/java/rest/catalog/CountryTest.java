@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -13,13 +14,14 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import rest.Application;
 import rest.countries.controller.CountriesController;
-import rest.user.dto.UserListDto;
+import rest.countries.model.Countries;
+import rest.response.Response;
 
-import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
-import static com.jayway.jsonpath.matchers.JsonPathMatchers.isJson;
-import static org.hamcrest.MatcherAssert.assertThat;
+import java.util.List;
+
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 
 @ActiveProfiles("test")
@@ -39,14 +41,11 @@ public class CountryTest {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<UserListDto> req = new HttpEntity<>( headers);
+        HttpEntity req = new HttpEntity<>( headers);
 
-        ResponseEntity<String> res = restTemplate.postForEntity(uc.toUriString(), req, String.class);
-        String json = res.getBody();
+        ResponseEntity<Response<List<Countries>>> res = restTemplate.exchange(uc.toUriString(), HttpMethod.POST, req, new ParameterizedTypeReference<Response<List<Countries>>>() {});
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
-
-        assertThat(json, isJson());
-        assertThat(json, hasJsonPath("$.data[*]", hasSize(1)));
+        assertThat(res.getBody().getData(), hasSize(1));
     }
 }
