@@ -1,0 +1,1 @@
+INSERT INTO country (code, name) VALUES (1,'SADAS');

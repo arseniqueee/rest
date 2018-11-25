@@ -41,7 +41,7 @@ public class OrganizationController implements Serializable {
         return list;
     }
 
-    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get organization by id")
     public OrganizationFullDto getById(@PathVariable(value = "id") Long id) {
         OrganizationFullDto organization = service.findById(id);
