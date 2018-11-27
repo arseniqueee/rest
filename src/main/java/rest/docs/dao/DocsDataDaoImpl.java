@@ -22,9 +22,7 @@ public class DocsDataDaoImpl implements DocsDataDao {
     }
 
     /**
-     * Find DocsData by id
-     * @param id document data id
-     * @return DocsData entity
+     * {@inheritDoc}
      */
     @Override
     public DocsData findById(Long id) {
@@ -32,8 +30,7 @@ public class DocsDataDaoImpl implements DocsDataDao {
     }
 
     /**
-     * Save DocsData
-     * @param data Entity for save
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -46,8 +43,7 @@ public class DocsDataDaoImpl implements DocsDataDao {
     }
 
     /**
-     * Find last row in DocsData table
-     * @return DocsData entity
+     * {@inheritDoc}
      */
     @Override
     public DocsData findLast() {

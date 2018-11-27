@@ -22,12 +22,7 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     /**
-     * Find offices
-     * @param id Office id
-     * @param name Office name
-     * @param phone Office phone
-     * @param active Office active
-     * @return list offices
+     * {@inheritDoc}
      */
     @Override
     public List<Office> findByIdOrg(Long id, String name, String phone, boolean active) {
@@ -51,9 +46,7 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     /**
-     * Find office by id
-     * @param id Office id
-     * @return Office entity
+     * {@inheritDoc}
      */
     @Override
     public Office findById(Long id) {
@@ -61,8 +54,7 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     /**
-     * Save office
-     * @param office Office entity
+     * {@inheritDoc}
      */
     @Override
     public void save(Office office) {
@@ -70,8 +62,7 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     /**
-     * Update office
-     * @param office Office entity
+     * {@inheritDoc}
      */
     @Override
     public void update(Office office) {

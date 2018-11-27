@@ -13,7 +13,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * User repository
+ * {@inheritDoc}
  */
 @Repository
 public class UserDaoImpl implements  UserDao {
@@ -29,15 +29,7 @@ public class UserDaoImpl implements  UserDao {
     }
 
     /**
-     * Find users by filter
-     * @param officeId office id
-     * @param firstName full name user
-     * @param lastName last name user
-     * @param middleName middle name user
-     * @param position position of user
-     * @param docCode document code user
-     * @param citizenshipCode city code
-     * @return
+     * {@inheritDoc}
      */
     @Override
     public List<User> findAll(Long officeId, String firstName, String lastName, String middleName, String position, Long docCode, Long citizenshipCode) {
@@ -84,9 +76,7 @@ public class UserDaoImpl implements  UserDao {
     }
 
     /**
-     * Find user by id
-     * @param id User id
-     * @return User entity
+     * {@inheritDoc}
      */
     @Override
     public User findById(Long id) {
@@ -94,8 +84,7 @@ public class UserDaoImpl implements  UserDao {
     }
 
     /**
-     * Update user
-     * @param user User entity
+     * {@inheritDoc}
      */
     @Override
     public void update(User user) {
@@ -123,8 +112,7 @@ public class UserDaoImpl implements  UserDao {
 
 
     /**
-     * Save user
-     * @param user User entity
+     * {@inheritDoc}
      */
     @Override
     public void save(User user) {
@@ -141,12 +129,7 @@ public class UserDaoImpl implements  UserDao {
         manager.persist(userNew);
     }
 
-    @Override
-    public User findLast() {
-        String query = "select u from User u order by u.id desc";
-        TypedQuery<User> result = manager.createQuery(query, User.class);
-        return result.getResultList().get(0);
-    }
+
 
 
 }

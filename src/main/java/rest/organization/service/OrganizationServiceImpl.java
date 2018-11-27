@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Organization service
+ * {@inheritDoc}
  */
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
@@ -29,9 +29,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     /**
-     * Get organizations by filter
-     * @param dto filter dto
-     * @return list dto items
+     * {@inheritDoc}
      */
     @Override
     public List<OrganizationItemDto> findAll(OrganizationListDto dto) {
@@ -40,9 +38,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     /**
-     * Get organization by id
-     * @param id Organization id
-     * @return dto item organization
+     * {@inheritDoc}
      */
     @Override
     public OrganizationFullDto findById(Long id) {
@@ -50,9 +46,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     /**
-     * Save organization
-     * @param organization save dto organization
-     * @return result
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -64,9 +58,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     /**
-     * Update organization
-     * @param dto update dto organization
-     * @return result
+     * {@inheritDoc}
      */
     @Override
     @Transactional

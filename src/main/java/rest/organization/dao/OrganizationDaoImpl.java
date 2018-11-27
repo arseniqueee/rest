@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * Organization repository
+ * {@inheritDoc}
  */
 @Repository
 public class OrganizationDaoImpl implements OrganizationDao {
@@ -23,11 +23,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     /**
-     * Get list organizations
-     * @param inn inn of organization
-     * @param name name of organization
-     * @param active active of organization
-     * @return list organizations
+     * {@inheritDoc}
      */
     @Override
     public List<Organization> getAll(String inn, String name, boolean active) {
@@ -45,9 +41,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     /**
-     * Get organization by id
-     * @param id Organization id
-     * @return Organization entity
+     * {@inheritDoc}
      */
     @Override
     public Organization getById(Long id) {
@@ -55,8 +49,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     /**
-     * Save organization
-     * @param organization Organization entity
+     * {@inheritDoc}
      */
     @Override
     public void save(Organization organization){
@@ -64,8 +57,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     /**
-     * Update organization
-     * @param organization Organization entity
+     * {@inheritDoc}
      */
     @Override
     public void update(Organization organization) {

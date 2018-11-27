@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * Country repository
+ * {@inheritDoc}
  */
 @Repository
 public class CountriesDaoImpl implements CountriesDao {
@@ -21,6 +21,9 @@ public class CountriesDaoImpl implements CountriesDao {
         this.manager = manager;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Countries> findAll() {
         TypedQuery<Countries> query = manager.createQuery("SELECT h from Countries h", Countries.class);

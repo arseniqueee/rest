@@ -28,9 +28,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * List offices with filter dto
-     * @param dto filter dto
-     * @return list dto
+     * {@inheritDoc}
      */
     @Override
     public List<OfficeListOutDto> findByIdOrg(OfficeListDto dto) {
@@ -39,9 +37,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * Find office by id
-     * @param id Office id
-     * @return dto office item
+     * {@inheritDoc}
      */
     @Override
     public OfficeItemDto findById(Long id) {
@@ -50,9 +46,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * Update office
-     * @param dto update dto
-     * @return result
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -62,9 +56,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * Save office
-     * @param office save dto
-     * @return result
+     * {@inheritDoc}
      */
     @Override
     @Transactional

@@ -25,8 +25,7 @@ public class DocsServiceImpl implements DocsService {
     }
 
     /**
-     * List documents
-     * @return List of documents
+     * {@inheritDoc}
      */
     @Override
     public List<DocsListDto> findAll() {

@@ -12,7 +12,7 @@ import java.util.List;
 
 
 /**
- * Document repository
+ * {@inheritDoc}
  */
 @Repository
 public class DocsDaoImpl implements DocsDao {
@@ -31,15 +31,11 @@ public class DocsDaoImpl implements DocsDao {
         return result.getResultList();
     }
 
-    @Override
-    public void saveDocData(DocsData docsData) {
 
-    }
 
 
     /**
-     *
-     * @param docs Docs entity for save
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -51,9 +47,7 @@ public class DocsDaoImpl implements DocsDao {
     }
 
     /**
-     *
-     * @param code Document code
-     * @return document entity
+     * {@inheritDoc}
      */
     @Override
     public Docs findByCode(Long code) {

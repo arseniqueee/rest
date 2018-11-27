@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * User service
+ * {@inheritDoc}
  */
 @Service
 public class UserSerivceImpl implements UserService {
@@ -40,10 +40,7 @@ public class UserSerivceImpl implements UserService {
     }
 
     /**
-     * Find user by filter
-     *
-     * @param dto filter dto
-     * @return list of users
+     * {@inheritDoc}
      */
     @Override
     public List<UserListOutDto> findAll(UserListDto dto) {
@@ -52,10 +49,7 @@ public class UserSerivceImpl implements UserService {
     }
 
     /**
-     * Find user by id
-     *
-     * @param id User id
-     * @return item dto user
+     * {@inheritDoc}
      */
     @Override
     public UserItemDto findId(Long id) {
@@ -64,10 +58,7 @@ public class UserSerivceImpl implements UserService {
     }
 
     /**
-     * Update user
-     *
-     * @param dto update user dto
-     * @return result
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -77,10 +68,7 @@ public class UserSerivceImpl implements UserService {
     }
 
     /**
-     * Save user
-     *
-     * @param dto save dto user
-     * @return result
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -95,24 +83,7 @@ public class UserSerivceImpl implements UserService {
         }else {
             throw new DocsDataNotFoundException();
         }
-//        if (dto.getDocCode() != null){
-//            if (docsDataDao.findById(dto.getDocCode()) != null){
-//                dao.save(mapper.map(dto, User.class));
-//            }else {
-//                throw new DocsDataNotFoundException();
-//            }
-//        }else {
-//            Docs docs = mapper.map(dto, Docs.class);
-//            if (docsDao.findByCode(docs.getCode()) == null){
-//                docsDao.saveDocs(docs);
-//            }
-//            dao.save(mapper.map(dto, User.class));
-//            DocsData data = new DocsData(dto.getDocNumber(), new Date());
-//            docsDataDao.save(data);
-//            User user = dao.findLast();
-//            user.setDocCode(docsDataDao.findLast().getId());
-//            dao.save(user);
-//        }
+
         return new Result("success");
     }
 }

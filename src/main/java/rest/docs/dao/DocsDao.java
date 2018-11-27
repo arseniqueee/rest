@@ -6,15 +6,30 @@ import rest.docs.model.DocsData;
 
 import java.util.List;
 
+/**
+ * Document repository
+ */
 public interface DocsDao
 {
 
+    /**
+     *
+     * @return List of document
+     */
     public List<Docs> getList();
 
-    public void saveDocData(DocsData docsData);
 
+    /**
+     *
+     * @param docs Docs entity for save
+     */
     void saveDocs(Docs docs);
 
+    /**
+     *
+     * @param code Document code
+     * @return document entity
+     */
     Docs findByCode(Long code);
 
 
