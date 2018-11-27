@@ -1,6 +1,7 @@
 package rest.organization.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import rest.organization.model.Organization;
 
@@ -12,12 +13,12 @@ import java.util.List;
  * Organization repository
  */
 @Repository
-public class OrhanizationDaoImpl implements OrganizationDao {
+public class OrganizationDaoImpl implements OrganizationDao {
 
     private final EntityManager entityManager;
 
     @Autowired
-    public OrhanizationDaoImpl(EntityManager entityManager) {
+    public OrganizationDaoImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

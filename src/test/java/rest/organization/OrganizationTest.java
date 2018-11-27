@@ -2,7 +2,6 @@ package rest.organization;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.util.UriComponents;
@@ -19,12 +17,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 import rest.Application;
 import rest.organization.controller.OrganizationController;
 import rest.organization.dao.OrganizationDao;
+import rest.organization.dao.OrganizationDaoTest;
 import rest.organization.dto.*;
 
+import rest.organization.model.Organization;
 import rest.response.Response;
 import rest.response.Result;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
@@ -33,7 +32,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 
 @ActiveProfiles("test")
@@ -44,6 +42,18 @@ public class OrganizationTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private OrganizationDaoTest dao;
+
+    @Autowired
+    private OrganizationDao daoOne;
+
+    @After
+    public void resetDb(){
+        dao.deleteAll();
+        dao.flush();
+    }
+
 
     @Test
     public void listOrganizations() throws JsonProcessingException {
@@ -51,10 +61,12 @@ public class OrganizationTest {
                 .path("/organization/list")
                 .build();
 
+        create("New organization2").getId();
+        create("New organization").getId();
+
         OrganizationListDto listDto = new OrganizationListDto();
         listDto.setActive(true);
         listDto.setName("New organization");
-
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -70,9 +82,11 @@ public class OrganizationTest {
 
     @Test
     public void getOrganizationById() {
+        Long id = create("New organization").getId();
+
         UriComponents uc = UriComponentsBuilder.newInstance()
                 .path("/organization/{id}")
-                .buildAndExpand(1);
+                .buildAndExpand(id);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity req = new HttpEntity<>(headers);
@@ -81,7 +95,7 @@ public class OrganizationTest {
 
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
-        assertThat(res.getBody().getData().getId(), is(1L));
+        assertThat(res.getBody().getData().getId(), is(id));
     }
 
     @Test
@@ -116,8 +130,10 @@ public class OrganizationTest {
                 .path("/organization/update")
                 .build();
 
+        Long id = create("New organization").getId();
+
         OrganizationUpdateDto updateDto = new OrganizationUpdateDto();
-        updateDto.setId(1L);
+        updateDto.setId(id);
         updateDto.setName("Updated organization");
         updateDto.setFullName("Updated organization");
         updateDto.setAddress("Updated organization address");
@@ -135,5 +151,10 @@ public class OrganizationTest {
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
         assertThat(res.getBody().getData().getResult(), is("success"));
+    }
+
+    private Organization create(String name){
+        Organization organization = new Organization(name, "New organization", "132465s8", "132465s8", "Adress", "+7985632148", true);
+        return dao.saveAndFlush(organization);
     }
 }

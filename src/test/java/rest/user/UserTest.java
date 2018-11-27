@@ -2,6 +2,7 @@ package rest.user;
 
 
 import org.hamcrest.MatcherAssert;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ import rest.Application;
 import rest.response.Response;
 import rest.response.Result;
 import rest.user.controller.UserController;
+import rest.user.dao.UserDaoTest;
 import rest.user.dto.*;
+import rest.user.model.User;
 
 import java.sql.Date;
 import java.util.List;
@@ -38,11 +41,23 @@ public class UserTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private UserDaoTest dao;
+
+    @After
+    public void resetTd(){
+        dao.deleteAll();
+        dao.flush();
+    }
+
     @Test
     public void listUser() {
         UriComponents uc = UriComponentsBuilder.newInstance()
                 .path("/user/list")
                 .build();
+
+        create("Misha");
+        create("Jora");
 
         UserListDto filterDto = new UserListDto();
         filterDto.setOfficeId(1L);
@@ -60,9 +75,11 @@ public class UserTest {
 
     @Test
     public void getUserById() {
+        Long id = create("Misha").getId();
+
         UriComponents uc = UriComponentsBuilder.newInstance()
                 .path("/user/{id}")
-                .buildAndExpand(1);
+                .buildAndExpand(id);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -71,7 +88,7 @@ public class UserTest {
         ResponseEntity<Response<UserItemDto>> res = restTemplate.exchange(uc.toUriString(), HttpMethod.GET, req, new ParameterizedTypeReference<Response<UserItemDto>>() {});
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
-        assertThat(res.getBody().getData().getId(), is(1L));
+        assertThat(res.getBody().getData().getId(), is(id));
     }
 
     @Test
@@ -110,10 +127,10 @@ public class UserTest {
         UriComponents uc = UriComponentsBuilder.newInstance()
                 .path("/user/update")
                 .build();
-
+        Long id = create("Misha").getId();
 
         UserUpdateDto saveDto = new UserUpdateDto();
-        saveDto.setId(1L);
+        saveDto.setId(id);
         saveDto.setOfficeId(1L);
         saveDto.setFirstName("Updated user first name");
         saveDto.setMiddleName("New middleName");
@@ -133,5 +150,10 @@ public class UserTest {
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
         assertThat(res.getBody().getData().getResult(), is("success"));
+    }
+
+    private User create(String name){
+        User user = new User(1L, name, "String", "String", "String", "String", 1L, 1L,true);
+        return dao.saveAndFlush(user);
     }
 }

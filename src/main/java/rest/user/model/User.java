@@ -67,7 +67,7 @@ public class User {
     /**
      * City code
      */
-    @Column(name = "city_code", nullable = false)
+    @Column(name = "city_code", nullable = true)
     private Long citizenshipCode;
 
     /**
@@ -80,11 +80,11 @@ public class User {
     @JoinColumn(name = "office_id", insertable = false, updatable = false)
     private Office office;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "doc_code", insertable = false, updatable = false)
     private DocsData docsData;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "city_code", updatable = false, insertable = false)
     private Countries countries;
 

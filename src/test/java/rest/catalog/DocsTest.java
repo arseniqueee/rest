@@ -1,6 +1,7 @@
 package rest.catalog;
 
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import rest.Application;
-import rest.docs.controller.DocsController;
+import rest.docs.dao.DocsDaoTest;
 import rest.docs.model.Docs;
 import rest.response.Response;
-import rest.user.dto.UserListDto;
 
 import java.util.List;
 
@@ -35,13 +35,22 @@ public class DocsTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private DocsDaoTest dao;
+
+    @After
+    public void resetDb(){
+        dao.deleteAll();
+        dao.flush();
+    }
+
     @Test
     public void listDocs(){
         UriComponents uc = UriComponentsBuilder.newInstance()
                 .path("/docs")
                 .build();
 
-
+        create();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -50,6 +59,10 @@ public class DocsTest {
         ResponseEntity<Response<List<Docs>>> res = restTemplate.exchange(uc.toUriString(), HttpMethod.POST, req, new ParameterizedTypeReference<Response<List<Docs>>>() {});
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
-        assertThat(res.getBody().getData(), hasSize(1));
+        assertThat(res.getBody().getData(), hasSize(2));
+    }
+    private Docs create(){
+        Docs docs = new Docs(15L, "INN");
+        return dao.saveAndFlush(docs);
     }
 }

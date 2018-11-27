@@ -1,6 +1,7 @@
 package rest.office;
 
 import org.hamcrest.MatcherAssert;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,10 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import rest.Application;
 import rest.office.controller.OfficeController;
+import rest.office.dao.OfficeDaoTest;
 import rest.office.dto.*;
 
+import rest.office.model.Office;
 import rest.response.Response;
 import rest.response.Result;
 
@@ -37,11 +40,23 @@ public class OfficeTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private OfficeDaoTest dao;
+
+    @After
+    public void resetDb(){
+        dao.deleteAll();
+        dao.flush();
+    }
+
     @Test
     public void listOffice() {
         UriComponents uc = UriComponentsBuilder.newInstance()
                 .path("/office/list")
                 .build();
+
+        Long id = create("New Office").getId();
+        create("New office 2");
 
         OfficeListDto filterDto = new OfficeListDto();
         filterDto.setOrgId(1L);
@@ -55,14 +70,16 @@ public class OfficeTest {
 
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
-        MatcherAssert.assertThat(res.getBody().getData(), hasSize(1));
+        assertThat(res.getBody().getData(), hasSize(2));
     }
 
     @Test
     public void getOfficeById() {
+        Long id = create("Office").getId();
+
         UriComponents uc = UriComponentsBuilder.newInstance()
                 .path("/office/{id}")
-                .buildAndExpand(1);
+                .buildAndExpand(id);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity req = new HttpEntity<>(headers);
@@ -70,7 +87,7 @@ public class OfficeTest {
         ResponseEntity<Response<OfficeItemDto>> res = restTemplate.exchange(uc.toUriString(), HttpMethod.GET, req,new ParameterizedTypeReference<Response<OfficeItemDto>>() {});
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
-        MatcherAssert.assertThat(res.getBody().getData().getId(), is(1L));
+        MatcherAssert.assertThat(res.getBody().getData().getId(), is(id));
     }
 
     @Test
@@ -78,7 +95,7 @@ public class OfficeTest {
         UriComponents uc = UriComponentsBuilder.newInstance()
                 .path("/office/save")
                 .build();
-        Long aLong = new Long(2);
+
         OfficeSaveDto saveDto = new OfficeSaveDto();
         saveDto.setName("New office");
         saveDto.setAddress("New office address");
@@ -103,8 +120,10 @@ public class OfficeTest {
                 .path("/office/update")
                 .build();
 
+        Long id = create("Office").getId();
+
         OfficeUpdateDto updateDto = new OfficeUpdateDto();
-        updateDto.setId(1L);
+        updateDto.setId(id);
         updateDto.setName("Updated office");
         updateDto.setAddress("Updated office address");
         updateDto.setOrgId(1L);
@@ -120,5 +139,10 @@ public class OfficeTest {
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
         assertThat(res.getBody().getData().getResult(), is("success"));
+    }
+
+    private Office create(String name){
+        Office office = new Office(1L, name, "Address", "Phone", true);
+        return dao.saveAndFlush(office);
     }
 }

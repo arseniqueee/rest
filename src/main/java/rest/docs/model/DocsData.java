@@ -41,6 +41,9 @@ public class DocsData {
     @JoinColumn(name = "docs_code", insertable = false, updatable = false)
     private Docs docs;
 
+    @OneToOne(mappedBy = "docsData", orphanRemoval = true)
+    private User user;
+
 
     public DocsData() {
     }

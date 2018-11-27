@@ -1,6 +1,8 @@
 package rest.countries.model;
 
 
+import rest.user.model.User;
+
 import javax.persistence.*;
 
 
@@ -15,7 +17,6 @@ public class Countries {
      * Country code
      */
     @Id
-    @GeneratedValue
     @Column(name = "code")
     private Long code;
 
@@ -26,6 +27,14 @@ public class Countries {
     private String name;
 
     public Countries() {
+    }
+
+    @OneToOne(mappedBy = "countries", orphanRemoval = true)
+    private User user;
+
+    public Countries(Long code, String name) {
+        this.code = code;
+        this.name = name;
     }
 
     public Long getCode() {

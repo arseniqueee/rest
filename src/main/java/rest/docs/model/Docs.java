@@ -21,7 +21,7 @@ public class Docs {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "docs", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "docs", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<DocsData> docsDatas;
 
     public Docs() {

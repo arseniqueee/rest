@@ -64,7 +64,7 @@ public class Organization {
     @Column(name = "active", nullable = false)
     private boolean active;
 
-    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Office> offices;
 
     public Organization() {
@@ -72,6 +72,17 @@ public class Organization {
     }
 
     public Organization(String name, String fullName, String inn, String kpp, String address, String phone, boolean active) {
+        this.name = name;
+        this.fullName = fullName;
+        this.inn = inn;
+        this.kpp = kpp;
+        this.address = address;
+        this.phone = phone;
+        this.active = active;
+    }
+
+    public Organization(Long id, String name, String fullName, String inn, String kpp, String address, String phone, boolean active) {
+        this.id = id;
         this.name = name;
         this.fullName = fullName;
         this.inn = inn;
